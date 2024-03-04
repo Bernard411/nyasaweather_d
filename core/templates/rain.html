@@ -1,0 +1,938 @@
+{% load static %}
+{% include 'h.html' %}
+<section class="homeID" id="home" style=" height: 500px; background-image: url('https://i.pinimg.com/originals/0e/f3/bb/0ef3bb66d9216fffcea9022628f7bb26.gif'); background-repeat:repeat; border-radius: 20px;">
+        <div class="row" id="homeID" style="height: 200px;">
+            <div class="col-md-7 grid-margin stretch-card" style=" border-radius: 5px; opacity: 100%; margin-right: 100px;">
+                <div class="content">
+                    <div class="split_class" style="width: 100%;">
+                        <link rel="stylesheet" type="text/css" href="{% static 'css/animation.css' %}">
+                        <h3 style="padding-bottom: 6rem; color: white; font-size: larger;">Climate</h3>
+                        <h3 style="color: white;">Data</h3>
+                        <div class="cardm" style="margin-top: 10px; opacity: 80%;">
+                            <div class="card">
+                              <svg class="weather" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" xml:space="preserve">  <image id="image0" width="100" height="100" x="0" y="0" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAMg0lEQVR42u2de5AcVb3HP7/unZ19Tt4vQsgGwpIABoREEVJqlFyLwgclEsmliFZULIWgqFHxlZKioBRKIVzBRwEmKUFQsQollhCzAW9xrzxKi/IiybVAgVjktdlkd3Z3errPzz+6Z3d2d2a3Z7bnsaF/VVvdc/qc032+nz3nd87p7tMQW2yxxRZbbLHFFltsscVWXZNaX0Ap1ruLeQ1ZlqN0CsxXQ6vCdFHaMKBCnxp6BNKqvCHKXs/mpfYPcaDW1x7W6haIdtGQdVlllDUoa1RZJTANBRQ02A79ZuTvEXEMPcBzCrvF0NUyj+dkDW6ty1jI6gqIbsEafBdrxLAB5TJRUqq5g1AWjLz0eWHH1fBrhO1te9kj38bUuuw5qwsg+hRzHJdNKB9HWTRCVIgaxoi0anhNlPvV5q7UVRyutRY1BaK7mOfYfEaVG0RJjREVKgpjRJghrXCv7XBb6zW8XitNagJEn6bZyfB14EsoyYKiQvVg5MVTwyDCbak2bpV1DFRbm6oDyXbxflW2IiwpKFYNYeTSql9jXka4ftoneaya+lQNiHbRloUfAlcNFbpeYYw8vj2T5dp519F3wgAZfIozLcPDKGdNJRh+HEGVvWp03cxreaHSWlmVPkHmSa4Sw/NTFQYKAmdYIv/bcxdXTmkgThebMGwXpWmqwsi7tmaDPHB0K1+cckBUkcwebkHYKsE5pjgM1K8pAnL70Tvk5ikFxHmKmwVuHL/QUwvGiHjC1498X26qhHaRO3VnD58FfnDCwhiRVj8/8wvcWbdAMk9xJR4/O5GaKcZJq4pRox+dvZlf1h2QzB85C5dnBFreDDCG4hnSanTV7K/ytyh0jMSH6NM0i8sDbzoY/rFWRB7ev8Uve10AyTr8AFjxpoMRHBc4O9kkd0Sh5aSbrGwXFys88WaFkR+m6Hvn3Mjuyeg5qRqif6VRlbtiGP5WPLln350kawYke4gvIyyLYQyFd844xucno2nZTZZ2MduBf6C0xjCGf6vS2+hpx/Rv012OrmXXEEf5XAxjbLkF2rOWXF+urmXVEN1JKpPkHwIzYhhjy61Kt6S1Y85t9JaqbVk1JJPk0zGM4uVGmUkz15SjbVlARNkYwxi/3MbIxqoAcXbxNmBZDGP8cotw5sFv8NaKA1Hl6hjGBOXOlcnI1RUHAnw4hhG6TB+pKJDBx1mOclIMI2SZYNHBzZxeMSCW/9BzDKOEMhnhPRUD4ilrYhillQmVygEROD+GUUKZ/HKdV6LG4Ux3khy0SItixzDCwQjO7fUOamvnXWTC6NwQFoijdJ5oMFTBM+B54Hr+vprhtLZAgwV2sF8qDBREsdsaOQ14MVIgatOJOTFgeB44LgxmIeP6+9qQwmqbj900C+Nm8PqP4Pa8RkIMjTYkbWiyIWEFzUoIGENhhjOiB2KYV46g9QTDMzDoQH8W0hlILnonqbM/QvuSd5Gc2xlclw5tvUya/tefp+eF39L9wsMkeg/RloTWhF9jQsFQEJgbVudSgLTn/jOmIgzH9SEcH4TGJZfQsXYLLQvOGboW1WEQGgRKooXWJatp6VjN/Eu+xZFntnP4iVsY6DvK9GZIWhPDCPbbw+ocupclSttUhZFx4Wg/HDMzmHfZTzltwyM0LzgHo4qqjtkW+qOhiVnvuIZTv/Ac5tRLOdzn5xvG+YuR6IEQAJlqMJwARjpxMh0bdzFjxUd94U0g9qitMeNDsltnccqGHTRd9CUO94HjjQ8jKHcqrMyhmywUo8XazTqF4XpwbADS9nw6P9VFYtpCX9g8PzHcPdWiWw1OkL+d+76vcUDh2P/czsym4XMKY8utSg5bdEAM9MkUgqEK/Rk47jSyeMMOEqkARnAxhbfFAYzdwpz/+Ar/OriPA3sfxQQ90ITl+5akBQnbb4JENfSdw9BARINXuqYIjKwLvRmYtfortC6+EBNELARiuMYUBzC25vjnn3flPWj2+9CQxO09QLb7ddL7nuT4iztpOPQSqSQ0SfjX4cL3spTjBfvfdQgDhX4HnOYOFl/0uTE1I7/JogiQ8Zqw3LkVBSsByQZQsKctxE4tJNnxNli7md4Xf8/h391KqvulwciBAP+aKjA84481Zq3ehDQ0YcxE4g43QwVhjYgzftx88K3L19J8+rsZ+NvO5dz/mVAih+5l2creeobhGb+ZGggGfY7XxLS3rCvajQ3T1R2KU6RHpkaHemzFem5YDTSd+YFrX3719W+G0Tn85GIXDekjpEVprCcYWdcfffdmICPttHZ+kOZFF9A0/2yaTjo/lH8Y20wN/5cX9zfF8y1YA1XVGF1/+qmLH4oECED6F7wILK8HGCaYBunphwHTzIwLb2D2hdcjiZZI/MPE/mY434nzGwLWi5ddunTp0oPFNC7Fh4DyDLC8HmCkB/0xRiYxn1PWP0zTgnP9eKaYGCP9QRHBxvclBfxEuPyG8m1Xy/4msKmYxCXdoFKlq55g9GuKxR97jKYF54b3D6NH5CX4hxF+okyfZIxufG7//qIv95R2T92wu9Y+IxM47X4HTvrAVhpnLi3NQU8yzlDcMoCqGlBa2vozayMB0rKe1zDsqxUMx4WBjD+pl1ywkvbll1UIgCkap5S4RWuJmtWRAAn0e6hWXdusO3xDacbKT6CEEWxYuErVpJLzM7owMiCey3YTzM9VE4bjQtYDT8E1QvOpF088YztRsxJhU1YKJA9mRQZk+gb+LvCnasJQHb7vbTywk9OxW2aV1/bnb0MCndA/lArJmIi6vYEZ5SeWckG1YKgJaobn97KslplDhR5KN6o7Ot64YXR3tJrjkSDf/ZHVEIBUPzvU8M9qwEDB5Hd7Fbz+7iq1/aaE/Ezoc2JMV6RA5NNkVfleNWDkH/cMiII32EO2vyevWQknhhYQbtIOutQ4xhxvSdp7IgUCkGrlJ2p4o9IwCJosVR+GJYBR0v//xKiCTjzRN65/qBIko/xXZ2dn0YfmygYi6xhAubHSMPLDBB+IKvT+5YFoBZsAZGiHP845jZpD6iS/O56uk3pPPfUJtqHsqTSM3I2x3LNQtgX9r/yR/r//oTLNymRqSXGQrmKuWrnytGMVAyKCWobrVMlWtGYEWyuYm24Mnoc69OgNOMf2V6ftDw3JjG2mjDGq3qZVK1Y8MZGmk158pv0a/g/DTZV88NkK0iVsH07C8muL23uQAw9ciXPkleC/0JQgrikBgJkEJHNc4EOrzl3xwzB62pMFAnDr+fz3YJu8Q+C0qGHkjuWe6jDG723ZEozc092k//oIVnIaibnLQCw/fRnjkqFxwiTHGsFpXcXca3uJK1aed9bzYbWMbAGz3ruZ6yF/JvfKW0QwgnKSzT0UrdA76IMxxp/1NUG8humLaV52KY0dF2G3z8NumY0R8L99MFbkXN6BhAXEHT2QDOKavHwEYxpbe0VIo7IfNa8qPK6O9ejb3372G6XqGOkSf8fu5gJjZBf5S25EACP3e8AZfn0g7QSCBeFZb1Ra8tJSJH/GuYa8sBH7eWGiDExP6sXnPcTTUWkY+SKYPVu52CCP5e69RwUDBTe4bZsbJKYdv5YQNGWu58PyCog5ZmxDuOsqBEMBC7JtSb38/Af5TZT6VWSp8e47uRqVbYBEBSMXJzfri/pN1WBQO3Iv2pRUM8qEgcEkbd14zs/ZFrV2FVv7vfsO/lON/FQgERWMXNqs5985zD/uun4NMqPOUS6MgmH+L8dCP3Xug2yvhG4VXYz/6O28V0V+jdIeFYxcmAmew3K9AmmjgjEqrUAadN0ZO9hZKc0q/nWEQ7exSlR+JbAoKhij47jesIMvmv8kYajymuvp5ct+xrOV1Ksqn6s4dguzsrZsE7g0Shih0kYBw/Bby9OPn7yDI5XWqnofdFGk+ztsViM3wfBnjuocxqCqfmPR/Xwvbx7ixACSswO3sNRS2SrKJfUMw8BuT/S6JfdGs2J1WKvZV9oO3swVovJdlI56gqGGVxDdvOg+flULXWr72bwfkThygPXGyI3o8KJoOcGqDONlNfqdAwnuX/ljsrXSpD4+LLkF65ByOSobFdaKYlcDhiqeGB5X0ftOXsgj9fDFz7oAkm8Hv8YCI6wXI1eoslKgIUoYanBVeRb0F67Dg0u2UfIEYCWt7oDk2+EtpLL9vBOR9+B/nHgZyuxSYKjhELBX4FlFdycdnpxzX+nLt1bL6hpIIXv1BmY2QqdRTgZaBdpM8PluC/rU0Af0eR77Ncu+U+4tb4Xp2GKLLbbYYosttthiiy222GKLLbbYYottfPs3GPtpnh9ZV0oAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDItMTdUMDg6MDM6MDcrMDA6MDBPnKiVAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTAyLTE3VDA4OjAzOjA3KzAwOjAwPsEQKQAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wMi0xN1QwODowMzowNyswMDowMGnUMfYAAAAASUVORK5CYII="></image>
+                              </svg>
+                              <div class="main mx-2" id="temperature" style="font-weight: bold;">loading</div>
+                              <div class="mainsub" style=" font-weight: bold;">lilongwe</div>
+                          
+                            </div>
+                          
+                            <div class="card2">
+                              <div class="upper">
+                               
+                              
+                             
+                              </div>
+                            </div>
+                          </div>
+                        <p class="animate-text" style="top: 2rem; padding-top: 4rem; padding-bottom: 3rem;">
+                         <span id="current-date" style="font-size: medium;">loading...</span>
+                            <span style="font-size: medium;">Northen Region</span>
+                            <span style="font-size: medium;">Northen Region</span>
+                            <span style="font-size: medium;">Northen Region</span>
+                           
+                        </p>
+                        
+                        
+                    
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-ZyNbOKaOX1Gbb07FYaU0pMz1PpiuoHePLFiOBEcJL5DgtZAWfR6qQl4xZNnv1z6p" crossorigin="anonymous">
+
+                  
+                        
+                      
+                        
+                    <script>
+             
+                        function fetchWeatherAndDate() {
+                            const apiKey = 'b0497bc522524401831134643231610';
+                            const location = 'Blantyre';
+            
+                            const weatherAPI = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`;
+            
+                            fetch(weatherAPI)
+                                .then(response => response.json())
+                                .then(data => {
+                                    const temperature = data.current.temp_c;
+                                    const condition = data.current.condition.text;
+                                    document.getElementById('temperature').textContent = `${temperature}°C, ${condition}`;
+                                })
+                                .catch(error => console.error('Error fetching weather data: ', error));
+            
+                            const currentDate = new Date();
+                            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                            const formattedDate = currentDate.toLocaleDateString('en-US', options);
+                            document.getElementById('current-date').textContent = formattedDate;
+                        }
+            
+                        fetchWeatherAndDate();
+                    </script>
+                            
+                        
+                        
+                        <script>
+                            const txts = document.querySelector(".animate-text").children,
+                                txtsLen = txts.length;
+                            let index = 0;
+                            const textInTimer = 1500,  //Speed
+                                textOutTimer = 1300;
+
+                            function animateText() {
+                                for (let i = 0; i < txtsLen; i++) {
+                                    txts[i].classList.remove("text-in", "text-out");
+                                }
+                                txts[index].classList.add("text-in");
+
+                                setTimeout(function () {
+                                    txts[index].classList.add("text-out");
+                                }, textOutTimer)
+
+                                setTimeout(function () {
+
+                                    if (index == txtsLen - 1) {
+                                        index = 0;
+                                    }
+                                    else {
+                                        index++;
+                                    }
+                                    animateText();
+                                }, textInTimer);
+                            }
+
+                            window.onload = animateText;
+                        </script>
+
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+           
+            <script type="module" src="{% static 'client.js' %}"></script>
+        </div>
+
+
+
+    </section>
+
+
+    
+      <style>
+        .cardm {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 46.64%;
+  left: 50%;
+}
+
+.card {
+  position: absolute;
+  width: 250px;
+  height: 130px;
+  border-radius: 25px;
+  background: whitesmoke;
+  color: black;
+  z-index: 2;
+  transition: .4s ease-in-out;
+}
+
+.weather {
+  position: relative;
+  margin: 1em;
+}
+
+.main {
+  font-size: 2em;
+  position: relative;
+  top: -3em;
+  left: 4.3em;
+}
+
+.mainsub {
+  position: relative;
+  top: -10.2em;
+  left: 14em;
+  font-size: 0.6em;
+}
+
+.card2 {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  width: 240px;
+  height: 130px;
+  border-radius: 35px;
+  background: white;
+  z-index: -1;
+  transition: .4s ease-in-out;
+}
+
+.card:hover {
+  background-color: #FFE87C;
+  cursor: pointer;
+}
+
+.card:hover + .card2 {
+  height: 300px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.card:hover + .card2 .lower {
+  top: 20.2em;
+}
+
+.upper {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  color: black;
+  left: 1.8em;
+  top: 0.5em;
+  gap: 4em;
+}
+
+.humiditytext {
+  position: relative;
+  left: 3.6em;
+  top: 2.7em;
+  font-size: 0.6em;
+}
+
+.airtext {
+  position: relative;
+  left: 3.8em;
+  top: 2.7em;
+  font-size: 0.6em;
+}
+
+.lower {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  text-align: center;
+  color: black;
+  left: 3em;
+  top: 1em;
+  margin-top: 0.7em;
+  font-size: 0.7em;
+  transition: .4s ease-in-out;
+}
+
+.aqi {
+  margin-right: 3.25em;
+}
+
+.realfeel {
+  margin-right: 1.8em;
+}
+
+.card3 {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 240px;
+  height: 30px;
+  top: 4.7em;
+  left: -2.4em;
+  font-size: 1.24em;
+  border-bottom-left-radius: 35px;
+  border-bottom-right-radius: 35px;
+  background: limegreen;
+  transition: .4s ease-in-out;
+}
+sectionn{
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: #96c7e8;
+  font-size: 70px;
+}
+#Home{
+  background: #fff;
+}
+#About{
+  background: #f2f2f2;
+}
+#Category{
+  background: #e6e6e6;
+}
+#Latest{
+  background: #fff;
+}
+#Contact{
+  background: #f2f2f2;
+}
+#Feedback{
+  background: #e6e6e6;
+}
+.button a{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #fff;
+  background: #2980b9;
+  padding: 7px 12px;;
+  font-size: 18px;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.15);
+}
+.card {
+  position: relative;
+  background-color: #ffffff;
+  padding: 0;
+  z-index: 1;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  min-width: 480px;
+  transition: 200ms ease-in-out;
+}
+
+.username {
+  color: #C6E1ED;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+
+
+.body .text {
+  margin: 0 10px 0 0;
+  white-space: pre-line;
+  color: #c0c3d7;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.footer {
+  position: relative;
+  width: 100%;
+  color: #9fa4aa;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  margin-top: 10px;
+}
+
+.footer div {
+  margin-right: 1rem;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.footer svg {
+  margin-right: 5px;
+  height: 100%;
+  stroke: #9fa4aa;
+}
+
+.viewer span {
+  height: 20px;
+  width: 20px;
+  background-color: rgb(28, 117, 219);
+  margin-right: -6px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  display: grid;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  font-size: 8px;
+  color: #fff;
+  padding: 2px;
+}
+
+.viewer span svg {
+  stroke: #fff;
+}
+
+
+
+
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.radio-tile-group {
+  display: flex;
+  flex-wrap: wrap;
+  
+  justify-content: center;
+}
+
+.radio-tile-group .input-container {
+  position: relative;
+  height: 80px;
+  width: 80px;
+  margin: 0.5rem;
+
+}
+
+.radio-tile-group .input-container .radio-button {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.radio-tile-group .input-container .radio-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #079ad9;
+  border-radius: 5px;
+  padding: 1rem;
+  transition: transform 300ms ease;
+}
+
+.radio-tile-group .input-container .icon svg {
+  fill: #079ad9;
+  width: 2rem;
+  height: 2rem;
+}
+
+.radio-tile-group .input-container .radio-tile-label {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #079ad9;
+}
+
+.radio-tile-group .input-container .radio-button:checked + .radio-tile {
+  background-color: #079ad9;
+  border: 2px solid #079ad9;
+  color: white;
+  transform: scale(1.1, 1.1);
+}
+
+.radio-tile-group .input-container .radio-button:checked + .radio-tile .icon svg {
+  fill: white;
+  background-color: #079ad9;
+}
+
+.radio-tile-group .input-container .radio-button:checked + .radio-tile .radio-tile-label {
+  color: white;
+  background-color: #079ad9;
+}
+
+
+
+
+      </style>
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 1px;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  canvas {
+    margin-top: 20px;
+  }
+</style>
+<style>
+
+.news-ticker {
+  background-color: #ffffff;
+  color: #fff;
+  padding: 10px 0;
+  overflow: hidden;
+}
+
+.ticker-content {
+  animation: ticker 20s linear infinite;
+}
+
+.ticker-text {
+  display: inline-block;
+
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+
+      </style>
+
+<style>
+  .button {
+text-decoration: none;
+line-height: 1;
+border-radius: 1.5rem;
+overflow: hidden;
+position: relative;
+box-shadow: 10px 10px 20px rgba(0,0,0,.05);
+background-color: #fff;
+color: #121212;
+border: none;
+cursor: pointer;
+}
+
+.button-decor {
+position: absolute;
+inset: 0;
+background-color: var(--clr);
+transform: translateX(-100%);
+transition: transform .3s;
+z-index: 0;
+}
+
+.button-content {
+display: flex;
+align-items: center;
+font-weight: 600;
+position: relative;
+overflow: hidden;
+}
+
+.button__icon {
+width: 48px;
+height: 40px;
+background-color: var(--clr);
+display: grid;
+place-items: center;
+}
+
+.button__text {
+display: inline-block;
+transition: color .2s;
+padding: 2px 1.5rem 2px;
+padding-left: .75rem;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+
+}
+
+.button:hover .button__text {
+color: #fff;
+}
+
+.button:hover .button-decor {
+transform: translate(0);
+}
+</style>
+
+</section>
+<style>
+    /* Custom CSS to remove padding between columns */
+    .no-gutters {
+        margin-right: 0;
+        margin-left: 0;
+    }
+</style>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <div class="news-ticker my-3">
+  
+  
+      <div class="ticker-content">
+        <button class="button" style="--clr: #00ad54;">
+          <span class="button-decor"></span>
+          <div class="button-content">
+              <div class="button__icon">
+                  <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" width="24">
+                      <circle opacity="0.5" cx="25" cy="25" r="23" fill="url(#icon-payments-cat_svg__paint0_linear_1141_21101)"></circle>
+                      <mask id="icon-payments-cat_svg__a" fill="#fff">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M34.42 15.93c.382-1.145-.706-2.234-1.851-1.852l-18.568 6.189c-1.186.395-1.362 2-.29 2.644l5.12 3.072a1.464 1.464 0 001.733-.167l5.394-4.854a1.464 1.464 0 011.958 2.177l-5.154 4.638a1.464 1.464 0 00-.276 1.841l3.101 5.17c.644 1.072 2.25.896 2.645-.29L34.42 15.93z">
+                          </path>
+                      </mask>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M34.42 15.93c.382-1.145-.706-2.234-1.851-1.852l-18.568 6.189c-1.186.395-1.362 2-.29 2.644l5.12 3.072a1.464 1.464 0 001.733-.167l5.394-4.854a1.464 1.464 0 011.958 2.177l-5.154 4.638a1.464 1.464 0 00-.276 1.841l3.101 5.17c.644 1.072 2.25.896 2.645-.29L34.42 15.93z" fill="#fff"></path>
+                      <path d="M25.958 20.962l-1.47-1.632 1.47 1.632zm2.067.109l-1.632 1.469 1.632-1.469zm-.109 2.068l-1.469-1.633 1.47 1.633zm-5.154 4.638l-1.469-1.632 1.469 1.632zm-.276 1.841l-1.883 1.13 1.883-1.13zM34.42 15.93l-2.084-.695 2.084.695zm-19.725 6.42l18.568-6.189-1.39-4.167-18.567 6.19 1.389 4.166zm5.265 1.75l-5.12-3.072-2.26 3.766 5.12 3.072 2.26-3.766zm2.072 3.348l5.394-4.854-2.938-3.264-5.394 4.854 2.938 3.264zm5.394-4.854a.732.732 0 01-1.034-.054l3.265-2.938a3.66 3.66 0 00-5.17-.272l2.939 3.265zm-1.034-.054a.732.732 0 01.054-1.034l2.938 3.265a3.66 3.66 0 00.273-5.169l-3.265 2.938zm.054-1.034l-5.154 4.639 2.938 3.264 5.154-4.638-2.938-3.265zm1.023 12.152l-3.101-5.17-3.766 2.26 3.101 5.17 3.766-2.26zm4.867-18.423l-6.189 18.568 4.167 1.389 6.19-18.568-4.168-1.389zm-8.633 20.682c1.61 2.682 5.622 2.241 6.611-.725l-4.167-1.39a.732.732 0 011.322-.144l-3.766 2.26zm-6.003-8.05a3.66 3.66 0 004.332-.419l-2.938-3.264a.732.732 0 01.866-.084l-2.26 3.766zm3.592-1.722a3.66 3.66 0 00-.69 4.603l3.766-2.26c.18.301.122.687-.138.921l-2.938-3.264zm11.97-9.984a.732.732 0 01-.925-.926l4.166 1.389c.954-2.861-1.768-5.583-4.63-4.63l1.39 4.167zm-19.956 2.022c-2.967.99-3.407 5.003-.726 6.611l2.26-3.766a.732.732 0 01-.145 1.322l-1.39-4.167z" fill="#fff" mask="url(#icon-payments-cat_svg__a)"></path>
+                      <defs>
+                          <linearGradient id="icon-payments-cat_svg__paint0_linear_1141_21101" x1="25" y1="2" x2="25" y2="48" gradientUnits="userSpaceOnUse">
+                              <stop stop-color="#fff" stop-opacity="0.71"></stop>
+                              <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+                          </linearGradient>
+                      </defs>
+                  </svg>
+              </div>
+              <span class="button__text ticker-text" style="font-size: small; font-weight: bold; width: auto;">Breaking News: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+          </div>
+      </button>
+      </div>
+    </div>
+    <div class="col-lg-12 my-3">
+      <div class="row">
+        <div class="col-lg-8">
+      <div class="card w-100" style="height: auto;">
+        <div class="card-body">
+          <h5 class="card-title">National Rainfall Monitoring:</h5>
+    
+        
+          <div id="rainfallAreaChart" width="800" height="400"></div>
+    
+          <script>
+            document.addEventListener("DOMContentLoaded", () => {
+              async function fetchRainfallData(locationName, date) {
+                const apiKey = '547afd6a9ad38bd23e255e28e1a2bf49';
+                const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${locationName}&appid=${apiKey}&units=metric`;
+    
+                try {
+                  const response = await fetch(apiUrl);
+                  const data = await response.json();
+    
+                 
+                  const rainfallData = data.list
+                    .filter(entry => {
+                      const entryDate = new Date(entry.dt * 1000);
+                      const targetDate = new Date(date);
+                      return entryDate.toDateString() === targetDate.toDateString();
+                    })
+                    .map(entry => entry.rain ? entry.rain['12h'] || 0 : 0);
+    
+                  return rainfallData;
+                } catch (error) {
+                  console.error(`Error fetching rainfall data for ${locationName}:`, error);
+                  return [];
+                }
+              }
+    
+              const locations = ["Blantyre", "Zomba", "Mulanje", "Chikwawa", "Phalombe", "Thyolo"];
+              const currentDate = new Date();
+              const yesterday = new Date(currentDate);
+              yesterday.setDate(yesterday.getDate() - 1);
+    
+              Promise.all(locations.map(location => fetchRainfallData(location, yesterday)))
+                .then(data => {
+                  const seriesDataYesterday = locations.map((location, index) => ({
+                    name: `${location} - Yesterday`,
+                    data: data[index],
+                  }));
+    
+                  return Promise.all(locations.map(location => fetchRainfallData(location, currentDate)))
+                    .then(dataToday => {
+                      const seriesDataToday = locations.map((location, index) => ({
+                        name: `${location} - Today`,
+                        data: dataToday[index],
+                      }));
+    
+                      const allSeriesData = [...seriesDataYesterday, ...seriesDataToday];
+    
+                      new ApexCharts(document.querySelector("#rainfallAreaChart"), {
+                        series: allSeriesData,
+                        chart: {
+                          type: 'area',
+                          height: 350,
+                          zoom: {
+                            enabled: false
+                          },
+                          animations: {
+                            enabled: true,
+                            easing: 'easeinout',
+                            speed: 800,
+                            animateGradually: {
+                              enabled: true,
+                              delay: 150,
+                            },
+                            dynamicAnimation: {
+                              enabled: true,
+                              speed: 350,
+                            },
+                          },
+                        },
+                        dataLabels: {
+                          enabled: true,
+                          offsetY: -10,
+                          style: {
+                            fontSize: '12px',
+                            colors: ["#304758"],
+                          },
+                        },
+                        stroke: {
+                          curve: 'smooth'
+                        },
+                        subtitle: {
+                          text: 'Max Rainfall Across Districts',
+                          align: 'left'
+                        },
+                        xaxis: {
+                          type: 'category',
+                          categories: locations.flatMap(location => [`${location} - Yesterday`, `${location} - Today`]),
+                        },
+                        yaxis: {
+                          opposite: true
+                        },
+                        legend: {
+                          horizontalAlign: 'left'
+                        }
+                      }).render();
+                    });
+                });
+            });
+          </script>
+        </div>
+      </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card w-100 h-100">
+              <div class="card-body">
+                  <h5 class="card-title">Early Warning Table</h5>
+      
+                  <table id="earlyWarningTable">
+                      <thead>
+                          <tr>
+                              <th>District</th>
+                              <th>Flood Warning</th>
+                              <th>Drought Warning</th>
+                              <th>Additional Information</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                         
+                      </tbody>
+                  </table>
+      
+                  <script>
+                      document.addEventListener("DOMContentLoaded", () => {
+                          const districts = ["Blantyre", "Zomba", "Mulanje", "Chikwawa", "Phalombe", "Thyolo", "Machinga", "Balaka", "Nsanje", "Dedza"];
+      
+                          async function fetchWeatherData(district) {
+                              const apiKey = '547afd6a9ad38bd23e255e28e1a2bf49';
+                              const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${district}&appid=${apiKey}&units=metric`;
+      
+                              try {
+                                  const response = await fetch(apiUrl);
+                                  const data = await response.json();
+                                  return data;
+                              } catch (error) {
+                                  console.error(`Error fetching weather data for ${district}:`, error);
+                                  return {};
+                              }
+                          }
+      
+                          async function updateTable() {
+                              const tableBody = document.getElementById('earlyWarningTable').getElementsByTagName('tbody')[0];
+                              tableBody.innerHTML = "";
+      
+                              for (const district of districts) {
+                                  const weatherData = await fetchWeatherData(district);
+      
+                                  const floodWarning = weatherData.main?.humidity > 80;
+                                  const droughtWarning = weatherData.main?.humidity < 30;
+      
+                                  const row = tableBody.insertRow();
+                                  row.insertCell(0).textContent = district;
+                                  row.insertCell(1).textContent = floodWarning ? "Yes" : "No";
+                                  row.insertCell(2).textContent = droughtWarning ? "Yes" : "No";
+      
+                                  const additionalInfoCell = row.insertCell(3);
+                                  additionalInfoCell.textContent = getAdditionalInformation(weatherData);
+                              }
+                          }
+      
+                          function getAdditionalInformation(weatherData) {
+                              const temperature = weatherData.main?.temp;
+                              const description = weatherData.weather?.[0]?.description;
+      
+                              if (temperature && description) {
+                                  return `Temperature: ${temperature}°C, Weather: ${description}`;
+                              } else {
+                                  return "N/A";
+                              }
+                          }
+      
+                          updateTable();
+                          setInterval(updateTable, 60000);
+                      });
+                  </script>
+      
+              </div>
+          </div>
+      </div>
+      
+<div class="col-lg-12">
+  <h1>Weather Data for Malawi Districts</h1>
+  <table id="weatherTable">
+    <thead>
+      <tr>
+        <th>District</th>
+        <th>Date</th>
+        <th>Temperature (°C)</th>
+        <th>Rainfall (mm)</th>
+        <th>Weather Description</th>
+      </tr>
+    </thead>
+    <tbody>
+     
+    </tbody>
+  </table>
+
+  <script>
+   
+var apiKey = '547afd6a9ad38bd23e255e28e1a2bf49';
+var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
+
+
+var districts = [
+  { name: 'Lilongwe', coords: [-13.9626, 33.7741] },
+  { name: 'Blantyre', coords: [-15.7667, 35.0167] },
+  { name: 'Mzuzu', coords: [-11.4656, 34.0209] },
+  { name: 'Zomba', coords: [-15.3833, 35.3333] },
+  { name: 'Kasungu', coords: [-13.0333, 33.4833] },
+  { name: 'Mangochi', coords: [-14.4775, 35.2647] },
+  { name: 'Karonga', coords: [-9.9333, 33.9333] },
+  { name: 'Salima', coords: [-13.7833, 34.4333] },
+  { name: 'Nkhotakota', coords: [-12.9167, 34.3] },
+  { name: 'Nsanje', coords: [-16.9206, 35.2628] },
+  { name: 'Dedza', coords: [-14.3667, 34.3333] },
+  { name: 'Mchinji', coords: [-13.8, 32.9] },
+  { name: 'Balaka', coords: [-14.9833, 34.95] },
+  { name: 'Mulanje', coords: [-16.0333, 35.5] },
+  { name: 'Thyolo', coords: [-16.0667, 35.15] },
+  { name: 'Rumphi', coords: [-11.0167, 33.8667] },
+  { name: 'Ntcheu', coords: [-14.8167, 34.6333] },
+  { name: 'Nkhata Bay', coords: [-11.6061, 34.2919] },
+  { name: 'Mwanza', coords: [-15.6, 34.5167] },
+  { name: 'Chikwawa', coords: [-16.0333, 34.8] },
+  { name: 'Dowa', coords: [-13.65, 33.9333] },
+  { name: 'Ntchisi', coords: [-13.35, 34.0167] },
+  { name: 'Chiradzulu', coords: [-15.7, 35.1833] },
+  { name: 'Neno', coords: [-15.55, 34.7333] },
+  { name: 'Phalombe', coords: [-15.8064, 35.6502] },
+  { name: 'Likoma Island', coords: [-12.1, 34.7333] },
+  { name: 'Machinga', coords: [-14.9667, 35.5167] },
+  { name: 'Ntcheu', coords: [-14.8167, 34.6333] },
+
+];
+
+
+districts.forEach(district => {
+  var requestUrl = `${apiUrl}?lat=${district.coords[0]}&lon=${district.coords[1]}&appid=${apiKey}&units=metric`;
+  
+  fetch(requestUrl)
+    .then(response => response.json())
+    .then(data => {
+     
+      var weatherData = data.list.slice(0, 5);
+
+ 
+      displayWeatherData(district.name, weatherData);
+    })
+    .catch(error => console.error(`Error fetching weather data for ${district.name}:`, error));
+});
+
+function displayWeatherData(district, data) {
+  var tableBody = document.querySelector('#weatherTable tbody');
+  var chartData = {
+    labels: [],
+    datasets: [{
+      label: 'Temperature (°C)',
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      data: []
+    }, {
+      label: 'Rainfall (mm)',
+      borderColor: 'rgb(54, 162, 235)',
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      data: []
+    }]
+  };
+
+  data.forEach(entry => {
+    var date = new Date(entry.dt * 1000);
+    var temperature = entry.main.temp;
+    var rainfall = entry.rain ? entry.rain['3h'] || 0 : 0; 
+
+    tableBody.insertRow().innerHTML = `<td>${district}</td><td>${date.toDateString()}</td><td>${temperature.toFixed(2)}</td><td>${rainfall.toFixed(2)}</td><td>${entry.weather[0].description}</td>`;
+
+    chartData.labels.push(date.toDateString());
+    chartData.datasets[0].data.push(temperature.toFixed(2));
+    chartData.datasets[1].data.push(rainfall.toFixed(2));
+  });
+
+  createAreaGraph(chartData);
+}
+
+
+function createAreaGraph(chartData) {
+  var ctx = document.getElementById('weatherChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: chartData,
+    options: {
+      scales: {
+        x: {
+          type: 'linear',
+          position: 'bottom'
+        },
+        y: {
+          min: 0
+        }
+      }
+    }
+  });
+}
+
+function displayWeatherData(district, data) {
+  var tableBody = document.querySelector('#weatherTable tbody');
+
+  data.forEach(entry => {
+    var date = new Date(entry.dt * 1000); 
+    var temperature = entry.main.temp;
+    var rainfall = entry.rain ? entry.rain['3h'] || 0 : 0;
+    var description = entry.weather[0].description;
+
+    var row = tableBody.insertRow();
+    row.insertCell(0).textContent = district;
+    row.insertCell(1).textContent = date.toDateString();
+    row.insertCell(2).textContent = temperature.toFixed(2);
+    row.insertCell(3).textContent = rainfall.toFixed(2);
+    row.insertCell(4).textContent = description;
+  });
+}
+
+    </script>
+</div>
+      </div>
+    </div>
+    
+<div class="button">
+  <a href="#Home"><i class="fas fa-arrow-up"></i></a>
+</div>
+</body>
+</html>

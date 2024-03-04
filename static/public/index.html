@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Region</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/finance.css">
+
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
+
+    <style>
+        #map {
+            height: 42rem;
+        }
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
+
+:root {
+  --yellow: #f5bf23;
+  --black: #111;
+  --white: #fff;
+  --light-color: #666;
+  --light-bg: #eee;
+  --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+  --border: .1rem solid rgba(0, 0, 0, .3);
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
+}
+
+html::-webkit-scrollbar {
+  width: 1rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--yellow);
+}
+
+section {
+  padding-top: 5rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  padding-bottom: 13rem;
+}
+
+.heading {
+  margin-bottom: 3rem;
+  font-size: 3rem;
+  color: var(--black);
+  text-transform: capitalize;
+  padding-left: 1rem;
+  border-left: 1rem solid var(--yellow);
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 1rem 3rem;
+  /* background: var(--black);
+  color: var(--white); */
+  cursor: pointer;
+  font-size: 1.7rem;
+  text-transform: capitalize;
+  -webkit-transition: .2s linear;
+  transition: .2s linear;
+  /* border-color: #2ea44f; */
+  border-radius: 0.5rem;
+  color: white;
+  background: linear-gradient(180deg, rgba(52, 183, 89, 0.15) 0%, rgba(46, 164, 79, 0) 100%), #2ea44f !important;
+}
+
+.btn:hover {
+  background: var(--yellow);
+  color: var(--black);
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    top: 50%;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    top: 50%;
+    opacity: 0;
+  }
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+.header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  -webkit-box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow);
+  padding: 0.5rem 10%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  z-index: 1000;
+  background: var(--black);
+}
+
+.header .logo {
+  font-size: 2.5rem;
+  color: var(--black);
+  text-transform: capitalize;
+}
+
+.header .logo span {
+  color: var(--yellow);
+}
+
+.header .navbar a {
+  font-size: 1.5rem;
+  color: var(--white);
+  text-transform: capitalize;
+  margin: 0 1rem;
+}
+
+.header .navbar a:hover {
+  color: var(--yellow);
+}
+
+.header .icons div {
+  height: 5rem;
+  width: 5rem;
+  line-height: 5rem;
+  font-size: 2rem;
+  background: var(--light-bg);
+  color: var(--black);
+  cursor: pointer;
+  text-align: center;
+  margin-left: .3rem;
+}
+
+.header .icons div:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+.header #menu-btn {
+  display: none;
+  background: black;
+  color: white;
+}
+
+.header .search-form {
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 70rem;
+  background: var(--white);
+  -webkit-box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow);
+  padding: 1rem;
+  display: none;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 1rem;
+  -webkit-animation: fadeIn .2s linear;
+  animation: fadeIn .2s linear;
+}
+
+.header .search-form.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.header .search-form input {
+  width: 100%;
+  padding: 1.2rem 1.4rem;
+  background: var(--light-bg);
+  font-size: 1.6rem;
+  color: var(--light-color);
+}
+
+.header .search-form label {
+  font-size: 2.5rem;
+  color: var(--black);
+  cursor: pointer;
+  margin: 0 1rem;
+}
+
+.header .search-form label:hover {
+  color: var(--yellow);
+}
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+.home {
+  padding: 0;
+}
+
+.home .slide {
+  min-height: 60rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.home .slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /* background: -webkit-gradient(linear, left top, right top, from(var(--white)), to(transparent));
+  background: linear-gradient(90deg, var(--white), transparent); */
+}
+
+.home .slide .content {
+  width: 50rem;
+  position: relative;
+}
+
+.home .slide .content h3 {
+  font-size: 6rem;
+  color: var(--black);
+  text-transform: capitalize;
+  text-transform: uppercase;
+}
+
+.home .slide .content p {
+  font-size: 1.4rem;
+  color: var(--light-color);
+  line-height: 2;
+  padding: 1rem 0;
+}
+
+.home .swiper-button-next,
+.home .swiper-button-prev {
+  top: initial;
+  bottom: 0;
+  left: initial;
+  right: 0;
+  height: 7rem;
+  width: 7rem;
+  line-height: 7rem;
+  background: var(--white);
+}
+
+.home .swiper-button-next:hover,
+.home .swiper-button-prev:hover {
+  background: var(--yellow);
+}
+
+.home .swiper-button-next::after,
+.home .swiper-button-prev::after {
+  font-size: 2rem;
+  color: var(--black);
+}
+
+.home .swiper-button-prev {
+  right: 7rem;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+.about .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
+
+.about .row .content {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 41rem;
+  flex: 1 1 41rem;
+}
+
+.about .row .content h3 {
+  font-size: 3.5rem;
+  color: var(--black);
+  text-transform: capitalize;
+}
+
+.about .row .content p {
+  font-size: 1.5rem;
+  color: var(--light-color);
+  line-height: 2;
+  padding: 1rem 0;
+}
+
+.about .box-container {
+  margin-top: 3rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(16rem, 1fr))[auto-fit];
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 2rem;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+}
+
+.about .box-container .box {
+  text-align: center;
+  background: var(--light-bg);
+  padding: 3rem 2rem;
+}
+
+.about .box-container .box h3 {
+  font-size: 4rem;
+  color: var(--black);
+  text-transform: capitalize;
+}
+
+.about .box-container .box p {
+  font-size: 1.5rem;
+  color: var(--light-color);
+  line-height: 2;
+  padding-top: .5rem;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+.c_finance {
+  background: var(--light-bg);
+}
+
+.c_finance .box-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(25rem, 1fr))[auto-fit];
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 2rem;
+}
+
+.c_finance .box-container .box {
+  text-align: center;
+  padding: 3rem;
+  background: var(--white);
+  -webkit-box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow);
+  border: var(--border);
+}
+
+
+.c_finance .box-container .box h3 {
+  font-size: 1.7rem;
+  color: var(--black);
+  text-transform: capitalize;
+  padding: 1rem 0;
+}
+
+.c_finance .box-container .box p {
+  font-size: 1.4rem;
+  color: var(--light-color);
+  line-height: 2;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+.p_finance {
+  background: var(--black);
+}
+
+.p_finance .heading {
+  color: var(--white);
+}
+
+.p_finance .box-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(25rem, 1fr))[auto-fit];
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 2rem;
+}
+
+.p_finance .box-container .box {
+  text-align: center;
+  padding: 3rem;
+  background: var(--white);
+  -webkit-box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow);
+  border: var(--border);
+}
+
+
+.p_finance .box-container .box h3 {
+  font-size: 1.7rem;
+  color: var(--black);
+  text-transform: capitalize;
+  padding: 1rem 0;
+}
+
+.p_finance .box-container .box p {
+  font-size: 1.4rem;
+  color: var(--light-color);
+  line-height: 2;
+}
+
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+.g_finance {
+  background: var(--light-bg);
+}
+
+.g_finance .box-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(25rem, 1fr))[auto-fit];
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 2rem;
+}
+
+.g_finance .box-container .box {
+  text-align: center;
+  padding: 3rem;
+  background: var(--white);
+  -webkit-box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow);
+  border: var(--border);
+}
+
+
+.g_finance .box-container .box h3 {
+  font-size: 1.7rem;
+  color: var(--black);
+  text-transform: capitalize;
+  padding: 1rem 0;
+}
+
+.g_finance .box-container .box p {
+  font-size: 1.4rem;
+  color: var(--light-color);
+  line-height: 2;
+}
+
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+.contact {
+  background: var(--black);
+}
+
+.contact .heading {
+  color: var(--white);
+}
+
+.contact .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+
+.contact .row form {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 41rem;
+  flex: 1 1 41rem;
+  background: var(--white);
+  padding: 2rem;
+}
+
+.contact .row form h3 {
+  font-size: 2.5rem;
+  color: var(--black);
+  text-transform: capitalize;
+}
+
+.contact .row form .box {
+  margin: .7rem 0;
+  width: 100%;
+  padding: 1.5rem 0;
+  border-bottom: var(--border);
+  font-size: 1.6rem;
+  color: var(--light-color);
+}
+
+.contact .row form .box:focus {
+  border-color: var(--yellow);
+}
+
+.contact .row form textarea {
+  height: 15rem;
+  resize: none;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+.blogs {
+  background: var(--light-bg);
+}
+
+.blogs .slide {
+  text-align: center;
+}
+
+.blogs .slide:hover .image img {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.blogs .slide .image {
+  height: 25rem;
+  width: 90%;
+  overflow: hidden;
+  margin: 0 auto;
+  margin-bottom: -3rem;
+}
+
+.blogs .slide .image img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-transition: .2s linear;
+  transition: .2s linear;
+}
+
+.blogs .slide .content {
+  padding: 2rem;
+  padding-top: 5rem;
+  background: var(--white);
+  -webkit-box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.2);
+}
+
+.blogs .slide .content h3 {
+  font-size: 2rem;
+  color: var(--black);
+  text-transform: capitalize;
+}
+
+.blogs .slide .content p {
+  padding: 1rem 0;
+  font-size: 1.4rem;
+  color: var(--light-color);
+  line-height: 2;
+}
+
+*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+.logo-container {
+  text-align: center;
+}
+
+.logo-container img {
+  height: 10rem;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+.footer {
+  text-align: center;
+}
+
+.footer .links .btn {
+  margin: .5rem;
+}
+
+.footer .credit {
+  font-size: 2rem;
+  color: var(--black);
+  text-transform: capitalize;
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+.footer .credit span {
+  color: var(--yellow);
+}
+
+@media (max-width: 1200px) {
+  .header {
+    padding: 1.5rem 2rem;
+  }
+
+  section {
+    padding: 3rem 5%;
+  }
+}
+
+@media (max-width: 991px) {
+  html {
+    font-size: 55%;
+  }
+
+  section {
+    padding: 3rem 2rem;
+  }
+
+  .header #menu-btn {
+    display: inline-block;
+  }
+
+  .header .navbar {
+    position: absolute;
+    top: 99%;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-top: var(--border);
+    border-bottom: var(--border);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    -webkit-transition: .2s linear;
+    transition: .2s linear;
+  }
+
+  .header .navbar.active {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    background: black;
+  }
+
+  .header .navbar a {
+    display: block;
+    margin: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header .search-form {
+    width: 90%;
+  }
+
+  .home .slide {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .home .slide .content {
+    text-align: center;
+  }
+
+  .home .slide .content h3 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 450px) {
+  html {
+    font-size: 50%;
+  }
+
+  .about .row .content h3 {
+    font-size: 2.5rem;
+  }
+}
+
+
+/*****************************************************************************************************************/
+
+
+.row {
+  --bs-gutter-x: 40px;
+  --bs-gutter-y: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-.5 * var(--bs-gutter-x));
+  margin-left: calc(-.5 * var(--bs-gutter-x));
+}
+
+.row>* {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-top: var(--bs-gutter-y);
+}
+
+.col-md-7 {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  width: 55%;
+}
+
+.col-md-5 {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  width: 41.66667%;
+}
+    </style>
+
+    <script type="importmap">
+    {
+        "imports":{
+            "three": "./build/three.module.js"
+        }
+    }
+</script>
+
+</head>
+
+<body>
+
+    <!-- header section starts  -->
+
+    <header class="header">
+
+
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#about">Introduction</a>
+            <a href="#c_finance">Map</a>
+            <a href="#p_finance">Natural disasters</a>
+            <a href="#g_finance">Earlier Cases</a>
+            <a href="#contact">contact</a>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <div class="topnav-right">
+                <a href=""></a>
+                <a href=" /surveyform" target="_blank">Survey</a>
+                <a href="/safezones" target="_blank">Safezones</a>
+                <a href="/coummunity" target="_blank">Coummunity</a>
+            </div>
+
+            <style>
+                .topnav-right {
+                    float: right;
+                }
+            </style>
+        </nav>
+
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <div id="search-btn" class="fas fa-search" style="visibility: hidden;"></div>
+        </div>
+
+        <form action="" class="search-form">
+            <input type="search" name="" placeholder="search here..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+
+    </header>
+
+
+    <!-- header section ends -->
+
+    <!-- home section starts  -->
+    <section class="homeID" id="home" style=" height: 62rem; background-image: url(/images/bg.png); ">
+        <div class="row" id="homeID">
+            <div class="col-md-7 grid-margin stretch-card">
+                <div class="content">
+                    <div class="split_class" style="width: 100%;">
+                        <link rel="stylesheet" type="text/css" href="assets/css/animation.css">
+                        <h3 style="padding-bottom: 6rem; color: white;">Climate</h3>
+                        <h3 style="color: white;">Action [UN]</h3>
+                        <p class="animate-text" style="top: 2rem; padding-top: 4rem; padding-bottom: 3rem;">
+                            <span>Map</span>
+                            <span>Charts</span>
+                            <span>Graphs</span>
+                            <span>Tabulets</span>
+                        </p>
+
+                        <form class="forms-sample" action="/" method="post">
+                            <div class="form-group row">
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="inputState" onchange="myr2()"
+                                        style="color: black; width: 40rem; height: 4rem; font-size: 1.5rem; border-radius: 1rem; border: 2px solid #9966ff; margin-bottom: 3rem;">
+                                        <option value=" SelectState">Select Region</option>
+                                        <option value="Andra Pradesh">kothrud</option>
+                                        <option value="Andra Pradesh">viman nagar</option>
+                                        <option value="Andra Pradesh">Berlin</option>
+
+                                        <option value="Andra Pradesh">Andra Pradesh</option>
+                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                        <option value="Assam">Assam</option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Chhattisgarh">Chhattisgarh</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Gujarat">Gujarat</option>
+                                        <option value="Haryana">Haryana</option>
+                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                        <option value="Jharkhand">Jharkhand</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Madya Pradesh">Madya Pradesh</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Manipur">Manipur</option>
+                                        <option value="Meghalaya">Meghalaya</option>
+                                        <option value="Mizoram">Mizoram</option>
+                                        <option value="Nagaland">Nagaland</option>
+                                        <option value="Orissa">Orissa</option>
+                                        <option value="Punjab">Punjab</option>
+                                        <option value="Rajasthan">Rajasthan</option>
+                                        <option value="Sikkim">Sikkim</option>
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                        <option value="Telangana">Telangana</option>
+                                        <option value="Tripura">Tripura</option>
+                                        <option value="Uttaranchal">Uttaranchal</option>
+                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                        <option value="West Bengal">West Bengal</option>
+                                        <option disabled style="background-color:#aaa; color:#fff">UNION Territories
+                                        </option>
+                                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands
+                                        </option>
+                                        <option value="Chandigarh">Chandigarh</option>
+                                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                        <option value="Daman and Diu">Daman and Diu</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Lakshadeep">Lakshadeep</option>
+                                        <option value="Pondicherry">Pondicherry</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <script>
+                                function myr2() {
+                                    var x2 = document.getElementById("inputState");
+                                    var i2 = x2.selectedIndex;
+                                    var rr2 = x2.options[i2].text;
+                                    console.log(rr2);
+                                    var txt2 = document.getElementById("ttid2").value
+                                        = rr2
+                                }
+                            </script>
+
+                            <button class="btn btn-gradient-primary me-2">Click Here!</button>
+
+                            <input type="text" name="n33" placeholder="2nd numm" id="ttid2"
+                                style="opacity: 0;visibility: hidden;">
+                            <br /><br />
+
+
+                        </form>
+                        <script>
+                            const txts = document.querySelector(".animate-text").children,
+                                txtsLen = txts.length;
+                            let index = 0;
+                            const textInTimer = 1500,  //Speed
+                                textOutTimer = 1300;
+
+                            function animateText() {
+                                for (let i = 0; i < txtsLen; i++) {
+                                    txts[i].classList.remove("text-in", "text-out");
+                                }
+                                txts[index].classList.add("text-in");
+
+                                setTimeout(function () {
+                                    txts[index].classList.add("text-out");
+                                }, textOutTimer)
+
+                                setTimeout(function () {
+
+                                    if (index == txtsLen - 1) {
+                                        index = 0;
+                                    }
+                                    else {
+                                        index++;
+                                    }
+                                    animateText();
+                                }, textInTimer);
+                            }
+
+                            window.onload = animateText;
+                        </script>
+
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+            <div class="col-md-5 grid-margin stretch-card " id="box" style="padding-top: 1.5rem;">
+                <canvas class="web-gl"></canvas>
+            </div>
+            <script type="module" src="./client.js"></script>
+        </div>
+
+
+
+    </section>
+
+
+
+    <!-- home section ends -->
+
+    <!-- about section starts  -->
+
+    <section class="about" id="about">
+
+        <h1 class="heading"> Introduction </h1>
+
+        <div class="row">
+
+            <div class="content">
+                <h3>Weather Visualization</h3>
+                <p>In a general sense, a weather map is a map that visualizes the weather conditions over a certain
+                    geographical area. The weather events depicted can be past, present or forecast for the future. From
+                    a
+                    meteorological point of view,
+                    a weather map shows the current state of the atmosphere over a larger area.</p>
+                <p>Weather maps can be used to visualize weather data. The maps show the current weather situation in
+                    real
+                    time, but can also be used to forecast the coming weather. Possible weather hazards are thus
+                    recognised
+                    at an early stage. </p>
+            </div>
+        </div>
+
+        <div class="box-container">
+
+        </div>
+
+    </section>
+
+    <!-- about section ends -->
+
+
+    <section class="c_finance" id="c_finance">
+
+        <h1 class="heading"> Map </h1>
+        <div id="map"></div>
+
+    </section>
+
+
+
+
+    <section class="p_finance" id="p_finance" style="background-color: black;">
+
+        <h1 class="heading">Natural Disasters</h1>
+
+        <!-- Slider End-->
+
+        <!-- testimonial Slider Start -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="css/slider.css">
+        <link rel="stylesheet" type="text/css" href="css/animation.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>
+        <script src="js/slider.js"></script>
+
+
+        <section class="test-section" style="text-align: center; ">
+            <div class="container">
+
+            </div>
+            <div class="testimonials-carousel-wrap">
+                <div class="listing-carousel-button listing-carousel-button-next"><i class="fa fa-caret-right"
+                        style="color: #fff"></i></div>
+                <div class="listing-carousel-button listing-carousel-button-prev"><i class="fa fa-caret-left"
+                        style="color: #fff"></i></div>
+                <div class="testimonials-carousel">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="testi-item">
+                                    <div class="testi-avatar"><img src="images/4.jpg"></div>
+                                    <div class="testimonials-text-before"><i class="fa fa-quote-right"></i></div>
+                                    <div class="testimonials-text">
+
+                                        <a href="#" class="text-link"></a>
+                                        <div class="testimonials-avatar">
+                                            <h3>Earthquake</h3>
+                                        </div>
+
+                                        <p>Any sudden shaking of the ground caused by the passage of seismic waves
+                                            through Earth’s
+                                            rocks.Earthquakes occur most often along geologic faults, narrow
+                                            zones where rock masses move in relation to one another. It is estimated
+                                            that 80
+                                            percent of the energy presently released in earthquakes comes from those
+                                            whose
+                                            epicentres are in this belt.</p>
+
+                                    </div>
+                                    <div class="testimonials-text-after"><i class="fa fa-quote-left"></i></div>
+                                </div>
+                            </div>
+
+                            <!--second--->
+                            <div class="swiper-slide">
+                                <div class="testi-item">
+                                    <div class="testi-avatar"><img src="images/6.jpg"></div>
+                                    <div class="testimonials-text-before"><i class="fa fa-quote-right"></i></div>
+                                    <div class="testimonials-text">
+
+                                        <a href="#" class="text-link"></a>
+                                        <div class="testimonials-avatar">
+                                            <h3>Flood</h3>
+                                        </div>
+
+                                        <p>Often caused by heavy rainfall, rapid snowmelt or a storm surge from a
+                                            tropical cyclone
+                                            or tsunami in coastal areas.
+                                            Between 1998-2017, floods affected more than 2 billion people
+                                            worldwide.Between 80-90%
+                                            of all documented disasters from natural
+                                            hazards during the past 10 years have resulted from floods, droughts,
+                                            tropical
+                                            cyclones, heat waves and severe storms.</p>
+
+                                    </div>
+                                    <div class="testimonials-text-after"><i class="fa fa-quote-left"></i></div>
+                                </div>
+                            </div>
+                            <!--third-->
+
+                            <div class="swiper-slide">
+                                <div class="testi-item">
+                                    <div class="testi-avatar"><img src="images/21.jpg"></div>
+                                    <div class="testimonials-text-before"><i class="fa fa-quote-right"></i></div>
+                                    <div class="testimonials-text">
+
+                                        <a href="#" class="text-link"></a>
+                                        <div class="testimonials-avatar">
+                                            <h3>Tsunami</h3>
+                                        </div>
+
+                                        <p>A series of extremely long waves caused by a large and sudden displacement of
+                                            the
+                                            ocean,
+                                            usually the result of an earthquake below or near the ocean floor. This
+                                            force creates
+                                            waves
+                                            that radiate outward in all directions away from their source, sometimes
+                                            crossing
+                                            entire ocean basins.
+                                            About 80% of tsunamis happen within the Pacific Ocean’s “Ring of Fire.”
+                                            Tsunamis can travel at speeds of about 500 miles or 805 kilometers an hour,
+                                            almost as
+                                            fast as a jet plane.</p>
+
+                                    </div>
+                                    <div class="testimonials-text-after"><i class="fa fa-quote-left"></i></div>
+                                </div>
+                            </div>
+
+                            <!--fourth-->
+                            <div class="swiper-slide">
+                                <div class="testi-item">
+                                    <div class="testi-avatar"><img src="images/5.png"></div>
+                                    <div class="testimonials-text-before"><i class="fa fa-quote-right"></i></div>
+                                    <div class="testimonials-text">
+
+                                        <a href="#" class="text-link"></a>
+                                        <div class="testimonials-avatar">
+                                            <h3>Landslide</h3>
+                                        </div>
+
+                                        <p>Defined as the movement of a mass of rock, debris, or earth down a slope.
+                                            Landslides
+                                            are a type of "mass wasting," which denotes any down-slope
+                                            movement of soil and rock under the direct influence of gravity.Slope
+                                            movement occurs
+                                            when forces acting down-slope (mainly due to gravity) exceed the
+                                            strength of the earth materials that compose the slope.Landslides are
+                                            generally
+                                            classified by type of movement and type of material.</p>
+
+                                    </div>
+                                    <div class="testimonials-text-after"><i class="fa fa-quote-left"></i></div>
+                                </div>
+                            </div>
+                            <!--testi end-->
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tc-pagination"></div>
+            </div>
+        </section>
+
+
+
+        <!-- testimonial Slider End -->
+
+
+
+        </div> -->
+
+    </section>
+
+
+
+
+    <section class=g_finance id=g_finance>
+
+        <h1 class="heading"> Some Cases </h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <a href="Case1.html">
+                    <h2>CASE 1</h2>
+                    <p>
+                        <h3>1996 Amarnath Yatra tragedy</h3>
+                    </p>
+                    <p>Amarnath Yatra tragedy (1996) is referred to the deaths of over 250 pilgrims in 1996 in Jammu and
+                        Kashmir state in India due to bad weather. </p>
+                </a>
+
+
+            </div>
+
+            <div class="box">
+                <a href="Case2.html">
+                    <h3>CASE 2</h3>
+                    <h3>2006 Surat Flood.
+                    </h3>
+                    </p>
+                    <p> The 2006 Surat flood occurred over 7–10 August 2006, which affected Surat, India, and nearby
+                        villages. About 80–95% of Surat was flooded.
+                    </p>
+                </a>
+
+            </div>
+
+            <div class="box">
+                <a href="Case3.html">
+                    <h3>CASE 3</h3>
+                    <p>
+                        <h3>2011 North Indian Cold Wave</h3>
+                    </p>
+                    <p>North Indian Cold Wave (2011) is the cold snap affected across northern parts of India in the
+                        winter
+                        of 2011, killing more than 130 people.
+                    </p>
+                </a>
+            </div>
+
+            <div class="box">
+                <a href="Case4.html">
+                    <h3>CASE 4</h3>
+                    <p>
+                        <h3>2012 Indian cold wave</h3>
+                    </p>
+                    <p>Indian cold wave during the winter months of 2012 killed at least 92 people across northern and
+                        eastern India.</p>
+                    </p>
+                </a>
+            </div>
+
+            <div class="box">
+                <a href="Case5.html">
+                    <h3>CASE 5</h3>
+                    <p>
+                        <h3>2016 Siachen Glacier avalanche.</h3>
+                    </p>
+                    <p>On 3 February 2016, an avalanche hit an Indian military base in northern Siachen Glacier region,
+                        trapping 10 soldiers under deep snow.
+
+                    </p>
+                </a>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section class="contact" id="contact">
+
+        <h1 class="heading"> contact us </h1>
+
+        <div class="row">
+
+            <form action="">
+                <h3>get in touch</h3>
+                <input type="text" placeholder="Name" class="box">
+                <input type="email" placeholder="Email" class="box">
+                <input type="tel" placeholder="Phone" class="box" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                <textarea name="" placeholder="Message" class="box" id="" cols="30" rows="10"></textarea>
+                <input type="submit" value="send message" class="btn">
+            </form>
+
+        </div>
+
+    </section>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+    <!-- custom js file link  -->
+    <script src="js/script.js"></script>
+
+    <script>
+        var map = L.map('map').setView([51.505, -0.09], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+    </script>
+
+</body>
+
+</html>

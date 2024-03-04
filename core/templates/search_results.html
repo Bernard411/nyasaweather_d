@@ -1,0 +1,220 @@
+{% load static %}
+{% include 'header.html' %}
+
+<div class="container">
+    <h1 class="heading">Results</h1>
+    <div class="row">
+        {% if error_message %}
+            <p>{{ error_message }}</p>
+        {% elif disaster %}
+            <section class="section">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card" style="height: 800px;">
+                            <div class="card-title mx-2">{{disaster.location}}</div>
+                            <div class="card-body">
+                                <div id="map" style="height: 100%; margin-top: 10px;"></div>
+                                <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+                                <script>
+                                    var map = L.map('map').setView([-13.2543, 34.3015], 7);
+
+                                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                        attribution: '© OpenStreetMap contributors'
+                                    }).addTo(map);
+
+                                    var apiKey = '547afd6a9ad38bd23e255e28e1a2bf49';
+
+                                    var districts = [
+                                        { name: '{{disaster.location}}', coordinates: [{{disaster.location.latitude}}, {{disaster.location.longitude}}] },
+                                    ];
+
+                                    function addBlinkingOverlay(marker) {
+                                        var count = 0;
+                                        setInterval(function () {
+                                            count++;
+                                            if (count % 2 === 0) {
+                                                marker.setStyle({ opacity: 0, fillOpacity: 0 });
+                                            } else {
+                                                marker.setStyle({ opacity: 1, fillOpacity: 0.5 });
+                                            }
+                                        }, 500);
+                                    }
+
+                                    districts.forEach(district => {
+                                        var apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${district.coordinates[0]}&lon=${district.coordinates[1]}&appid=${apiKey}`;
+
+                                        fetch(apiUrl)
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                var temperature = data.main.temp;
+                                                var pressure = data.main.pressure;
+                                                var windSpeed = data.wind.speed;
+                                                var clouds = data.clouds.all;
+
+                                                var marker = L.marker(district.coordinates).addTo(map)
+                                                    .bindPopup(`<b>${district.name}</b><br>Temperature: ${temperature}°C<br>Pressure: ${pressure} hPa<br>Wind Speed: ${windSpeed} m/s<br>Clouds: ${clouds}%`)
+                                                    .openPopup();
+
+                                                addBlinkingOverlay(marker);
+                                            })
+                                            .catch(error => console.error(`Error fetching weather data for ${district.name}:`, error));
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <h1>Disaster Data Table</h1>
+                        <table border="1">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Displaced</th>
+                                    <th>Areas</th>
+                                    <th>Dead</th>
+                                    <th>Date</th>
+                                    <th>Location</th>
+                                    <th>Relief Aid Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ disaster.name }}</td>
+                                    <td>{{ disaster.displaced }}</td>
+                                    <td>{{ disaster.affected_areas }}</td>
+                                    <td>{{ disaster.dead }}</td>
+                                    <td>{{ disaster.date }}</td>
+                                    <td>{{ disaster.location_info.name }} ({{ disaster.location_info.latitude }}, {{ disaster.location_info.longitude }})</td>
+                                    <td>{{ disaster.calculate_total_relief_aid_percentage }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="col-lg-12">
+                            <a href="{% url 'view_disaster' disaster.id %}" style="color: black;">
+                                <div class="card">
+                                    <div class="card-img-container">
+                                        <img src="{{ disaster.banner_image.url }}" class="card-img-top" alt="{{ disaster.name }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <i class="fas fa-map-marker-alt"></i>🇲🇼 <!-- Location icon -->
+                                            {{ disaster.location }} - {{ disaster.name }}
+                                        </h5>
+                                    </div>
+                                    <div class="card-icons">
+                                        <i class="fas fa-info-circle" title="More Info" style="color: #4CAF50;"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <style>
+                        .card-body {
+                            padding: 20px;
+                        }
+
+                        .card-title i,
+                        .card-text i {
+                            margin-right: 5px;
+                        }
+
+                        .card-title {
+                            font-size: 1.2rem;
+                            margin-bottom: 10px;
+                        }
+
+                        .card-text {
+                            font-size: 1rem;
+                            margin-bottom: 5px;
+                        }
+
+                        .card-text ul {
+                            padding-left: 20px;
+                        }
+
+                        .card-text li {
+                            margin-bottom: 5px;
+                        }
+
+                        .card-text li i {
+                            margin-right: 8px;
+                            color: #007bff;
+                        }
+
+                        .card {
+                            position: relative;
+                            overflow: hidden;
+                        }
+
+                        .card:hover {
+                            transform: scale(1.05);
+                            transition: transform 0.3s ease-in-out;
+                        }
+
+                        .card-icons {
+                            position: absolute;
+                            bottom: 10px;
+                            right: 10px;
+                        }
+
+                        .card-icons i {
+                            margin-left: 5px;
+                            font-size: 18px;
+                            color: #333;
+                            cursor: pointer;
+                        }
+
+                        .card-icons i:hover {
+                            color: #007bff;
+                        }
+                    </style>
+                {% endif %}
+
+                <style>
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-top: 20px;
+                        margin-bottom: 20px;
+                    }
+
+                    th, td {
+                        padding: 12px;
+                        text-align: left;
+                        border: 1px solid #ddd;
+                    }
+
+                    thead {
+                        background-color: #f2f2f2;
+                    }
+
+                    tbody tr:hover {
+                        background-color: #f5f5f5;
+                    }
+                </style>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/chart.js/chart.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+    <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="js/script.js"></script>
+
+    <script>
+        var map = L.map('map').setView([51.505, -0.09], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+    </script>
+</body>
+</html>

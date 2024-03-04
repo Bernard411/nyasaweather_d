@@ -1,0 +1,64 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [34.5, -12.5],
+              [35.5, -12.5],
+              [35.5, -11.5],
+              [34.5, -11.5],
+              [34.5, -12.5]
+            ]
+          ]
+        },
+        "properties": {
+          "district": "Sample District 1",
+          "riskLevel": "High"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [35.5, -12.5],
+              [36.5, -12.5],
+              [36.5, -11.5],
+              [35.5, -11.5],
+              [35.5, -12.5]
+            ]
+          ]
+        },
+        "properties": {
+          "district": "Sample District 2",
+          "riskLevel": "Medium"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [36.5, -12.5],
+              [37.5, -12.5],
+              [37.5, -11.5],
+              [36.5, -11.5],
+              [36.5, -12.5]
+            ]
+          ]
+        },
+        "properties": {
+          "district": "Sample District 3",
+          "riskLevel": "Low"
+        }
+      }
+      // Add more features for other districts
+    ]
+  }
+  

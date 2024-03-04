@@ -1,0 +1,899 @@
+{% load static %}
+{% include 'header.html' %}
+<script>
+   
+    function fetchWeatherAndDate() {
+        const apiKey = 'b0497bc522524401831134643231610';
+        const location = 'Blantyre';
+
+        const weatherAPI = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`;
+
+        fetch(weatherAPI)
+            .then(response => response.json())
+            .then(data => {
+                const temperature = data.current.temp_c;
+                const condition = data.current.condition.text;
+                document.getElementById('temperature').textContent = `${temperature}°C, ${condition}`;
+            })
+            .catch(error => console.error('Error fetching weather data: ', error));
+
+        const currentDate = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = currentDate.toLocaleDateString('en-US', options);
+        document.getElementById('current-date').textContent = formattedDate;
+    }
+
+    fetchWeatherAndDate();
+</script>
+
+
+   
+    <section class="homeID" id="home" style=" height: 62rem; background-image: url(static/tr.gif); background-repeat:repeat; ">
+        <div class="row" id="homeID">
+            <div class="col-md-7 grid-margin stretch-card" style="background-color: #054955; border-radius: 5px; opacity: 80%;">
+                <div class="content">
+                    <div class="split_class" style="width: 100%;">
+                        <link rel="stylesheet" type="text/css" href="{% static 'css/animation.css' %}">
+                        <h3 style="padding-bottom: 6rem; color: white;">Climate</h3>
+                        <h3 style="color: white;">Data [MW]</h3>
+                        <p class="animate-text" style="top: 2rem; padding-top: 4rem; padding-bottom: 3rem;">
+                         <span id="current-date">loading...</span>
+                            <span>Northen Region</span>
+                            <span>Central Region</span>
+                            <span>Southen Region</span>
+                            <span>Statistics | Action | Data</span>
+                        </p>
+                        {% if user.id %}
+                        <style>
+                           
+                            .search-bar {
+                                margin-top: 20px;
+                                margin-bottom: 20px;
+                                width: 60%;
+                            }
+                    
+                            .search-form {
+                                background-color: #f2f2f2;
+                                padding: 10px;
+                                border-radius: 5px;
+                                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                            }
+                    
+                            input[type="text"] {
+                                padding: 8px;
+                                border: none;
+                                border-radius: 3px;
+                                width: 90%;
+                            }
+                    
+                            button {
+                                background-color: #4CAF50;
+                                color: white;
+                                border: none;
+                                border-radius: 3px;
+                                padding: 8px;
+                                cursor: pointer;
+                            }
+                    
+                           
+                            .bi-search {
+                                font-size: 1.2rem;
+                            }
+                        </style>
+                    
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-ZyNbOKaOX1Gbb07FYaU0pMz1PpiuoHePLFiOBEcJL5DgtZAWfR6qQl4xZNnv1z6p" crossorigin="anonymous">
+
+                    <div class="search-bar">
+                        <form action="{% url 'search_disaster' %}" class="search-form d-flex align-items-center" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="city" placeholder="Enter your city name..." required>
+                            <button type="submit" title="Search"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                    {% endif %}
+                    
+                        
+                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                $('#inputState').on('change', function () {
+                                    var selectedOption = $(this).find(':selected');
+                                    var action = selectedOption.data('action');
+                        
+                                    if (action) {
+                                        window.location.href = action;
+                                    }
+                                });
+                            });
+                        </script>
+                        
+                        
+                      
+                        
+                       
+                            
+                        
+                        
+                        <script>
+                            const txts = document.querySelector(".animate-text").children,
+                                txtsLen = txts.length;
+                            let index = 0;
+                            const textInTimer = 1500,  //Speed
+                                textOutTimer = 1300;
+
+                            function animateText() {
+                                for (let i = 0; i < txtsLen; i++) {
+                                    txts[i].classList.remove("text-in", "text-out");
+                                }
+                                txts[index].classList.add("text-in");
+
+                                setTimeout(function () {
+                                    txts[index].classList.add("text-out");
+                                }, textOutTimer)
+
+                                setTimeout(function () {
+
+                                    if (index == txtsLen - 1) {
+                                        index = 0;
+                                    }
+                                    else {
+                                        index++;
+                                    }
+                                    animateText();
+                                }, textInTimer);
+                            }
+
+                            window.onload = animateText;
+                        </script>
+
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+            <div class="col-md-5 grid-margin stretch-card " id="box" style="padding-top: 1.5rem;">
+                <canvas class="web-gl"></canvas>
+            </div>
+            <script type="module" src="{% static 'client.js' %}"></script>
+        </div>
+
+
+
+    </section>
+    <section class="section dashboard" style="margin-top: 5px; margin-left: 30px;">
+        <div class="row">
+    
+         
+          <div class="col-lg-12">
+            <div class="row">
+    
+ 
+              
+              <script>
+             
+                function fetchWeatherAndDate() {
+                    const apiKey = 'b0497bc522524401831134643231610';
+                    const location = 'Blantyre';
+    
+                    const weatherAPI = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`;
+    
+                    fetch(weatherAPI)
+                        .then(response => response.json())
+                        .then(data => {
+                            const temperature = data.current.temp_c;
+                            const condition = data.current.condition.text;
+                            document.getElementById('temperature').textContent = `${temperature}°C, ${condition}`;
+                        })
+                        .catch(error => console.error('Error fetching weather data: ', error));
+    
+                    const currentDate = new Date();
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    const formattedDate = currentDate.toLocaleDateString('en-US', options);
+                    document.getElementById('current-date').textContent = formattedDate;
+                }
+    
+                fetchWeatherAndDate();
+            </script>
+            <main>
+           
+    
+            
+              
+            </div>
+          </div>
+
+          <section class="section">
+            <div class="row">
+                <div class="col-lg-4">
+                    
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+</head>
+<body>
+  <div id="map" style="height: 600px;"></div>
+  <script>
+
+var malawiCoords = [-13.2543, 34.3015];
+var map = L.map('map').setView(malawiCoords, 8);
+
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+var heatData = generateRandomHeatData(500, malawiCoords, 3);
+
+
+var heatLayer = L.heatLayer(heatData, { radius: 15, maxZoom: 10 }).addTo(map);
+
+function generateRandomHeatData(numPoints, center, intensity) {
+  var heatData = [];
+  for (var i = 0; i < numPoints; i++) {
+    var lat = center[0] + (Math.random() - 0.5) * intensity;
+    var lon = center[1] + (Math.random() - 0.5) * intensity;
+    heatData.push([lat, lon, Math.random()]);
+  }
+  return heatData;
+}
+
+
+  </script>
+
+
+                </div>
+                
+        
+      
+
+          
+                <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+                <div class="col-lg-8">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">National Rainfall Monitoring:</h5>
+                
+                    
+                      <div id="rainfallAreaChart" width="800" height="400"></div>
+                
+                      <script>
+                        document.addEventListener("DOMContentLoaded", () => {
+                          async function fetchRainfallData(locationName, date) {
+                            const apiKey = '547afd6a9ad38bd23e255e28e1a2bf49';
+                            const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${locationName}&appid=${apiKey}&units=metric`;
+                
+                            try {
+                              const response = await fetch(apiUrl);
+                              const data = await response.json();
+                
+                             
+                              const rainfallData = data.list
+                                .filter(entry => {
+                                  const entryDate = new Date(entry.dt * 1000);
+                                  const targetDate = new Date(date);
+                                  return entryDate.toDateString() === targetDate.toDateString();
+                                })
+                                .map(entry => entry.rain ? entry.rain['12h'] || 0 : 0);
+                
+                              return rainfallData;
+                            } catch (error) {
+                              console.error(`Error fetching rainfall data for ${locationName}:`, error);
+                              return [];
+                            }
+                          }
+                
+                          const locations = ["Blantyre", "Zomba", "Mulanje", "Chikwawa", "Phalombe", "Thyolo"];
+                          const currentDate = new Date();
+                          const yesterday = new Date(currentDate);
+                          yesterday.setDate(yesterday.getDate() - 1);
+                
+                          Promise.all(locations.map(location => fetchRainfallData(location, yesterday)))
+                            .then(data => {
+                              const seriesDataYesterday = locations.map((location, index) => ({
+                                name: `${location} - Yesterday`,
+                                data: data[index],
+                              }));
+                
+                              return Promise.all(locations.map(location => fetchRainfallData(location, currentDate)))
+                                .then(dataToday => {
+                                  const seriesDataToday = locations.map((location, index) => ({
+                                    name: `${location} - Today`,
+                                    data: dataToday[index],
+                                  }));
+                
+                                  const allSeriesData = [...seriesDataYesterday, ...seriesDataToday];
+                
+                                  new ApexCharts(document.querySelector("#rainfallAreaChart"), {
+                                    series: allSeriesData,
+                                    chart: {
+                                      type: 'area',
+                                      height: 350,
+                                      zoom: {
+                                        enabled: false
+                                      },
+                                      animations: {
+                                        enabled: true,
+                                        easing: 'easeinout',
+                                        speed: 800,
+                                        animateGradually: {
+                                          enabled: true,
+                                          delay: 150,
+                                        },
+                                        dynamicAnimation: {
+                                          enabled: true,
+                                          speed: 350,
+                                        },
+                                      },
+                                    },
+                                    dataLabels: {
+                                      enabled: true,
+                                      offsetY: -10,
+                                      style: {
+                                        fontSize: '12px',
+                                        colors: ["#304758"],
+                                      },
+                                    },
+                                    stroke: {
+                                      curve: 'smooth'
+                                    },
+                                    subtitle: {
+                                      text: 'Max Rainfall Across Districts',
+                                      align: 'left'
+                                    },
+                                    xaxis: {
+                                      type: 'category',
+                                      categories: locations.flatMap(location => [`${location} - Yesterday`, `${location} - Today`]),
+                                    },
+                                    yaxis: {
+                                      opposite: true
+                                    },
+                                    legend: {
+                                      horizontalAlign: 'left'
+                                    }
+                                  }).render();
+                                });
+                            });
+                        });
+                      </script>
+                    </div>
+                  </div>
+                
+                  <div class="row">
+                    {% for disaster in disaster %}
+                        <div class="col-lg-3">
+                            <a href="{% url 'view_disaster' disaster.id %}" style="color: black;">
+                                <div class="card">
+                                    <div class="card-img-container">
+                                        <img src="{{ disaster.banner_image.url }}" class="card-img-top" alt="{{ disaster.name }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <i class="fas fa-map-marker-alt"></i> 
+                                            {{ disaster.location }} - {{ disaster.name }}
+                                        </h5>
+                                        <p class="card-text">🇲🇼 Locations affected:</p>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <i class="fas fa-home"></i> 
+                                                {{ disaster.location }}
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-users"></i>
+                                                <b>{{ disaster.displaced }}</b> displaced
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-skull-crossbones"></i> 
+                                                <b>{{ disaster.dead }}</b> casualties
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <style>
+                                       
+                                        ul {
+                                            list-style: none;
+                                            padding: 0;
+                                        }
+                
+                                        li {
+                                            margin-bottom: 10px;
+                                        }
+                
+                                        
+                                        .fas {
+                                            margin-right: 5px;
+                                        }
+                
+                                       
+                                        .fas.fa-home {
+                                            color: #3498db;
+                                        }
+                
+                                        .fas.fa-users {
+                                            color: #2ecc71;
+                                        }
+                
+                                        .fas.fa-skull-crossbones {
+                                            color: #e74c3c; 
+                                        }
+                                    </style>
+                                    <div class="card-icons">
+                                        
+                                        <i class="fas fa-info-circle" title="More Info" style="color: #4CAF50;"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+              
+                
+
+
+<style>
+  .card-body {
+    padding: 20px;
+}
+
+.card-title i,
+.card-text i {
+    margin-right: 5px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.card-text ul {
+    padding-left: 20px;
+}
+
+.card-text li {
+    margin-bottom: 5px;
+}
+
+.card-text li i {
+    margin-right: 8px;
+    color: #007bff; 
+}
+
+  .card {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img-container {
+    position: relative;
+    overflow: hidden;
+    height: 0;
+    padding-bottom: 75%; 
+}
+
+.card-img-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-icons {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.card-icons i {
+    margin-left: 5px;
+    font-size: 18px;
+    color: #333; 
+    cursor: pointer;
+}
+
+.card-icons i:hover {
+    color: #007bff;
+}
+
+  </style>
+
+            </div>
+          </div>
+
+    
+          
+              
+<h1>Disaster Data Table</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Name</th>
+           
+            <th>Displaced</th>
+            <th>Areas</th>
+            <th>Dead</th>
+            <th>Date</th>
+            <th>Location</th>
+         
+            <th>Relief Aid Percentage</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for disaster in disaster %}
+            <tr>
+                <td>{{ disaster.name }}</td>
+              
+                <td>{{ disaster.displaced }}</td>
+                <td>{{ disaster.affected_areas }}</td>
+                <td>{{ disaster.dead }}</td>
+                <td>{{ disaster.date }}</td>
+                <td>{{ disaster.location_info.name }} ({{ disaster.location_info.latitude }}, {{ disaster.location_info.longitude }})</td>
+             
+                <td>{{ disaster.calculate_total_relief_aid_percentage }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+thead {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+
+
+  </style>
+    
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
+    <div class="col-lg-6 my-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">National Disaster Casueties</h5>
+    
+                <div id="radarChart"></div>
+    
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        new ApexCharts(document.querySelector("#radarChart"), {
+                            series: [{
+                                name: 'Series 1',
+                                data: [{% for disaster in disaster %}'{{disaster.dead}}', {% endfor %}],
+                            }],
+                            chart: {
+                                height: 350,
+                                type: 'radar',
+                            },
+                            labels: [{% for disaster in disaster %}'{{disaster.name}}', {% endfor %}],
+                        }).render();
+                    });
+                </script>
+    
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-6 my-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Early Warning Table</h5>
+    
+                <table id="earlyWarningTable">
+                    <thead>
+                        <tr>
+                            <th>District</th>
+                            <th>Flood Warning</th>
+                            <th>Drought Warning</th>
+                            <th>Additional Information</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                    </tbody>
+                </table>
+    
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        const districts = ["Blantyre", "Zomba", "Mulanje", "Chikwawa", "Phalombe", "Thyolo", "Machinga", "Balaka", "Nsanje", "Dedza"];
+    
+                        async function fetchWeatherData(district) {
+                            const apiKey = '547afd6a9ad38bd23e255e28e1a2bf49';
+                            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${district}&appid=${apiKey}&units=metric`;
+    
+                            try {
+                                const response = await fetch(apiUrl);
+                                const data = await response.json();
+                                return data;
+                            } catch (error) {
+                                console.error(`Error fetching weather data for ${district}:`, error);
+                                return {};
+                            }
+                        }
+    
+                        async function updateTable() {
+                            const tableBody = document.getElementById('earlyWarningTable').getElementsByTagName('tbody')[0];
+                            tableBody.innerHTML = "";
+    
+                            for (const district of districts) {
+                                const weatherData = await fetchWeatherData(district);
+    
+                                const floodWarning = weatherData.main?.humidity > 80;
+                                const droughtWarning = weatherData.main?.humidity < 30;
+    
+                                const row = tableBody.insertRow();
+                                row.insertCell(0).textContent = district;
+                                row.insertCell(1).textContent = floodWarning ? "Yes" : "No";
+                                row.insertCell(2).textContent = droughtWarning ? "Yes" : "No";
+    
+                                const additionalInfoCell = row.insertCell(3);
+                                additionalInfoCell.textContent = getAdditionalInformation(weatherData);
+                            }
+                        }
+    
+                        function getAdditionalInformation(weatherData) {
+                            const temperature = weatherData.main?.temp;
+                            const description = weatherData.weather?.[0]?.description;
+    
+                            if (temperature && description) {
+                                return `Temperature: ${temperature}°C, Weather: ${description}`;
+                            } else {
+                                return "N/A";
+                            }
+                        }
+    
+                        updateTable();
+                        setInterval(updateTable, 60000);
+                    });
+                </script>
+    
+            </div>
+        </div>
+    </div>
+    
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Data Table and Graph</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    canvas {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Weather Data for Malawi Districts</h1>
+  <table id="weatherTable">
+    <thead>
+      <tr>
+        <th>District</th>
+        <th>Date</th>
+        <th>Temperature (°C)</th>
+        <th>Rainfall (mm)</th>
+        <th>Weather Description</th>
+      </tr>
+    </thead>
+    <tbody>
+     
+    </tbody>
+  </table>
+
+  <script>
+   
+var apiKey = '547afd6a9ad38bd23e255e28e1a2bf49';
+var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
+
+
+var districts = [
+  { name: 'Lilongwe', coords: [-13.9626, 33.7741] },
+  { name: 'Blantyre', coords: [-15.7667, 35.0167] },
+  { name: 'Mzuzu', coords: [-11.4656, 34.0209] },
+  { name: 'Zomba', coords: [-15.3833, 35.3333] },
+  { name: 'Kasungu', coords: [-13.0333, 33.4833] },
+  { name: 'Mangochi', coords: [-14.4775, 35.2647] },
+  { name: 'Karonga', coords: [-9.9333, 33.9333] },
+  { name: 'Salima', coords: [-13.7833, 34.4333] },
+  { name: 'Nkhotakota', coords: [-12.9167, 34.3] },
+  { name: 'Nsanje', coords: [-16.9206, 35.2628] },
+  { name: 'Dedza', coords: [-14.3667, 34.3333] },
+  { name: 'Mchinji', coords: [-13.8, 32.9] },
+  { name: 'Balaka', coords: [-14.9833, 34.95] },
+  { name: 'Mulanje', coords: [-16.0333, 35.5] },
+  { name: 'Thyolo', coords: [-16.0667, 35.15] },
+  { name: 'Rumphi', coords: [-11.0167, 33.8667] },
+  { name: 'Ntcheu', coords: [-14.8167, 34.6333] },
+  { name: 'Nkhata Bay', coords: [-11.6061, 34.2919] },
+  { name: 'Mwanza', coords: [-15.6, 34.5167] },
+  { name: 'Chikwawa', coords: [-16.0333, 34.8] },
+  { name: 'Dowa', coords: [-13.65, 33.9333] },
+  { name: 'Ntchisi', coords: [-13.35, 34.0167] },
+  { name: 'Chiradzulu', coords: [-15.7, 35.1833] },
+  { name: 'Neno', coords: [-15.55, 34.7333] },
+  { name: 'Phalombe', coords: [-15.8064, 35.6502] },
+  { name: 'Likoma Island', coords: [-12.1, 34.7333] },
+  { name: 'Machinga', coords: [-14.9667, 35.5167] },
+  { name: 'Ntcheu', coords: [-14.8167, 34.6333] },
+
+];
+
+
+districts.forEach(district => {
+  var requestUrl = `${apiUrl}?lat=${district.coords[0]}&lon=${district.coords[1]}&appid=${apiKey}&units=metric`;
+  
+  fetch(requestUrl)
+    .then(response => response.json())
+    .then(data => {
+     
+      var weatherData = data.list.slice(0, 5);
+
+ 
+      displayWeatherData(district.name, weatherData);
+    })
+    .catch(error => console.error(`Error fetching weather data for ${district.name}:`, error));
+});
+
+function displayWeatherData(district, data) {
+  var tableBody = document.querySelector('#weatherTable tbody');
+  var chartData = {
+    labels: [],
+    datasets: [{
+      label: 'Temperature (°C)',
+      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      data: []
+    }, {
+      label: 'Rainfall (mm)',
+      borderColor: 'rgb(54, 162, 235)',
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      data: []
+    }]
+  };
+
+  data.forEach(entry => {
+    var date = new Date(entry.dt * 1000);
+    var temperature = entry.main.temp;
+    var rainfall = entry.rain ? entry.rain['3h'] || 0 : 0; 
+
+    tableBody.insertRow().innerHTML = `<td>${district}</td><td>${date.toDateString()}</td><td>${temperature.toFixed(2)}</td><td>${rainfall.toFixed(2)}</td><td>${entry.weather[0].description}</td>`;
+
+    chartData.labels.push(date.toDateString());
+    chartData.datasets[0].data.push(temperature.toFixed(2));
+    chartData.datasets[1].data.push(rainfall.toFixed(2));
+  });
+
+  createAreaGraph(chartData);
+}
+
+
+function createAreaGraph(chartData) {
+  var ctx = document.getElementById('weatherChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: chartData,
+    options: {
+      scales: {
+        x: {
+          type: 'linear',
+          position: 'bottom'
+        },
+        y: {
+          min: 0
+        }
+      }
+    }
+  });
+}
+
+function displayWeatherData(district, data) {
+  var tableBody = document.querySelector('#weatherTable tbody');
+
+  data.forEach(entry => {
+    var date = new Date(entry.dt * 1000); 
+    var temperature = entry.main.temp;
+    var rainfall = entry.rain ? entry.rain['3h'] || 0 : 0;
+    var description = entry.weather[0].description;
+
+    var row = tableBody.insertRow();
+    row.insertCell(0).textContent = district;
+    row.insertCell(1).textContent = date.toDateString();
+    row.insertCell(2).textContent = temperature.toFixed(2);
+    row.insertCell(3).textContent = rainfall.toFixed(2);
+    row.insertCell(4).textContent = description;
+  });
+}
+
+    </script>
+</body>
+</html>
+
+
+      
+          
+        </div>
+        </div>
+    </section>
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/chart.js/chart.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+    <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+    
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <!-- custom js file link  -->
+    <script src="{% static 'heat.js' %}"></script>
+
+    <script>
+        var map = L.map('map').setView([51.505, -0.09], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+    </script>
+
+</body>
+
+</html>

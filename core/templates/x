@@ -1,0 +1,803 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Management and Climate Change Awareness through an AI-Enabled</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css">
+
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/finance.css' %}">
+
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
+
+        <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link href="{% static 'css/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+        
+        <!-- Template Main CSS File -->
+        <link href="{% static 'assets/css/style2.css' %}" rel="stylesheet">
+        <link href="{% static 'css/assets/css/style.css' %}" rel="stylesheet">
+    <script type="importmap">
+    {
+        "imports":{
+            "three": "./build/three.module.js"
+        }
+    }
+</script>
+
+</head>
+
+<body>
+<style>
+    .body{
+        font-family: Poppins;
+    }
+</style>
+    <!-- header section starts  -->
+
+    <header class="header">
+
+
+        <nav class="navbar">
+            
+            
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+
+            <div class="topnav-right" style="margin-left: 500px;">
+                
+                
+                {% if user.id %}
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <a href="#home" style="color: black; font-weight: bold;">Home</a>
+                
+                <a href="#c_finance"style="color: black;  font-weight: bold;">Map</a>
+                <a href="#p_finance" style="color: black;  font-weight: bold;">Natural disasters</a>
+                
+                <a href="{% url 'logout' %}" style="color: black;  font-weight: bold;">logout</a>
+                {% else %}
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <a href="#home" style="color: black; font-weight: bold;">Home</a>
+                <a href="#about" style="color: black; font-weight: bold;">Introduction</a>
+                <a href="#c_finance"style="color: black;  font-weight: bold;">Map</a>
+                <a href="#p_finance" style="color: black;  font-weight: bold;">Natural disasters</a>
+                
+                <a href="{% url 'login' %}" style="color: black;  font-weight: bold;">login</a>
+                {% endif %}
+            </div>
+
+            <style>
+                .topnav-right {
+                    float: right;
+                }
+                .a {
+                    color: black;
+                }
+            </style>
+        </nav>
+
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <div id="search-btn" class="fas fa-search" style="visibility: hidden;"></div>
+        </div>
+
+        <form action="" class="search-form">
+            <input type="search" name="" placeholder="search here..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+
+    </header>
+
+<style></style>
+    <!-- header section ends -->
+
+    <!-- home section starts  -->
+    <section class="homeID" id="home" style=" height: 62rem; background-image: url({{view_disaster.image.url}}); background-repeat:repeat; ">
+        <div class="row" id="homeID">
+            <div class="col-md-7 grid-margin stretch-card" style="background-color: #054955; border-radius: 5px; opacity: 80%;">
+                <div class="content">
+                    <div class="split_class" style="width: 100%;">
+                        <link rel="stylesheet" type="text/css" href="{% static 'css/animation.css' %}">
+                        <h3 style="padding-bottom: 6rem; color: white;">Disaster</h3>
+                        <h3 style="color: white;">Data [{{view_disaster.location}}]</h3>
+                        <p class="animate-text" style="top: 2rem; padding-top: 4rem; padding-bottom: 3rem;">
+                            <span>Northen Region</span>
+                            <span>Central Region</span>
+                            <span>Southen Region</span>
+                            <span>Statistics | Action | Data</span>
+                        </p>
+                        {% if user.id %}
+                        <style>
+                            /* Style for the search bar */
+                            .search-bar {
+                                margin-top: 20px;
+                                margin-bottom: 20px;
+                                width: 60%;
+                            }
+                    
+                            .search-form {
+                                background-color: #f2f2f2;
+                                padding: 10px;
+                                border-radius: 5px;
+                                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                            }
+                    
+                            input[type="text"] {
+                                padding: 8px;
+                                border: none;
+                                border-radius: 3px;
+                                width: 90%;
+                            }
+                    
+                            button {
+                                background-color: #4CAF50;
+                                color: white;
+                                border: none;
+                                border-radius: 3px;
+                                padding: 8px;
+                                cursor: pointer;
+                            }
+                    
+                            /* Style for the search icon */
+                            .bi-search {
+                                font-size: 1.2rem;
+                            }
+                        </style>
+                    
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-ZyNbOKaOX1Gbb07FYaU0pMz1PpiuoHePLFiOBEcJL5DgtZAWfR6qQl4xZNnv1z6p" crossorigin="anonymous">
+
+                    <div class="search-bar">
+                        <form action="{% url 'search' %}" class="search-form d-flex align-items-center" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="city" placeholder="Enter your city name..." required>
+                            <button type="submit" title="Search"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                    {% endif %}
+                    
+                        
+                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                $('#inputState').on('change', function () {
+                                    var selectedOption = $(this).find(':selected');
+                                    var action = selectedOption.data('action');
+                        
+                                    if (action) {
+                                        window.location.href = action;
+                                    }
+                                });
+                            });
+                        </script>
+                        
+                        
+                      
+                        
+                       
+                            
+                        
+                        
+                        <script>
+                            const txts = document.querySelector(".animate-text").children,
+                                txtsLen = txts.length;
+                            let index = 0;
+                            const textInTimer = 1500,  //Speed
+                                textOutTimer = 1300;
+
+                            function animateText() {
+                                for (let i = 0; i < txtsLen; i++) {
+                                    txts[i].classList.remove("text-in", "text-out");
+                                }
+                                txts[index].classList.add("text-in");
+
+                                setTimeout(function () {
+                                    txts[index].classList.add("text-out");
+                                }, textOutTimer)
+
+                                setTimeout(function () {
+
+                                    if (index == txtsLen - 1) {
+                                        index = 0;
+                                    }
+                                    else {
+                                        index++;
+                                    }
+                                    animateText();
+                                }, textInTimer);
+                            }
+
+                            window.onload = animateText;
+                        </script>
+
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+            <div class="col-md-5 grid-margin stretch-card " id="box" style="padding-top: 1.5rem;">
+                <canvas class="web-gl"></canvas>
+            </div>
+            <script type="module" src="{% static 'client.js' %}"></script>
+        </div>
+
+
+
+    </section>
+    <section class="section dashboard" style="margin-top: 5px; margin-left: 30px;">
+        <div class="row">
+    
+          <!-- Left side columns -->
+          <div class="col-lg-12">
+            <div class="row">
+    
+              <!-- Model Predictions Card -->
+              <div class="col-xxl-4 col-md-6">
+                <div class="card info-card model-predictions-card">
+    
+                  <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                   
+                  </div>
+    
+                  <div class="card-body">
+                    <h5 class="card-title"><span>current location:</span></h5>
+    
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-cloud-rain"></i>
+                      </div>
+                      <div class="ps-3">
+                        <p id="temperature" style="font-size: x-small; font-weight: bold;">Loading...</p>
+                        <span class="text-danger small pt-1 fw-bold">15%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                      </div>
+                    </div>
+                  </div>
+    
+                </div>
+              </div><!-- End Model Predictions Card -->
+    
+              <!-- Rainfall Card -->
+              <div class="col-xxl-4 col-md-6">
+                <div class="card info-card rainfall-card">
+    
+                  <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                   
+                  </div>
+    
+                  <div class="card-body">
+                    <h5 class="card-title">Total displaced<span></h5>
+    
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-cloud-rain"></i>
+                      </div>
+                      <div class="ps-3">
+                       
+                        <h6>{{view_disaster.displaced}}</h6>
+                        
+                        <span class="text-success small pt-1 fw-bold">{{rainfall_data.year}}</span> <span class="text-muted small pt-2 ps-1">{{rainfall_data.month}}</span>
+                       
+                      </div>
+                    </div>
+                  </div>
+    
+                </div>
+              </div><!-- End Rainfall Card -->
+    
+              <!-- Temperature Card -->
+              <div class="col-xxl-4 col-xl-12">
+    
+                <div class="card info-card temperature-card">
+    
+                  <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                   
+                  </div>
+    
+                  <div class="card-body">
+                    <h5 class="card-title">Total<span>| casualties</span></h5>
+    
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-thermometer-half"></i>
+                      </div>
+                      <div class="ps-3">
+                       
+                        <h6>{{view_disaster.dead}}</h6>
+                       
+                        <span class="text-danger small pt-1 fw-bold">{{temp_data.year}}</span> <span class="text-muted small pt-2 ps-1">{{temp_data.month}}</span>
+    
+                      </div>
+                    </div>
+    
+                  </div>
+                </div>
+    
+              </div>
+    
+              <!-- Floods Card -->
+              
+              <script>
+                // JavaScript for fetching weather and date information
+                function fetchWeatherAndDate() {
+                    const apiKey = 'b0497bc522524401831134643231610';
+                    const location = 'Blantyre';
+    
+                    const weatherAPI = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`;
+    
+                    fetch(weatherAPI)
+                        .then(response => response.json())
+                        .then(data => {
+                            const temperature = data.current.temp_c;
+                            const condition = data.current.condition.text;
+                            document.getElementById('temperature').textContent = `${temperature}°C, ${condition}`;
+                        })
+                        .catch(error => console.error('Error fetching weather data: ', error));
+    
+                    const currentDate = new Date();
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    const formattedDate = currentDate.toLocaleDateString('en-US', options);
+                    document.getElementById('current-date').textContent = formattedDate;
+                }
+    
+                fetchWeatherAndDate();
+            </script>
+            <main>
+           
+    
+            
+              
+            </div>
+          </div>
+
+          <section class="section">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card" style="height: 600px;">
+                  <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-map"></i> Weather Map <span>Focus on Malawi</span></h5>
+                    <div id="map" style="height: 100%;"></div>
+                    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+                    <script>
+                      var map = L.map('map').setView([-13.2543, 34.3015], 6);
+          
+                      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap contributors'
+                      }).addTo(map);
+          
+                      // this is my API key
+                      var apiKey = 'a3388151eeeda8d97b14fbeaf70bad25';
+          
+                      // districts in Malawi with their coordinates
+                      var districts = [
+                        { name: '{{view_disaster.location}}', coordinates: [{{view_disaster.latitude}}, {{view_disaster.longtude}}] },
+                        
+                     
+                     
+                      ];
+          
+                      // Fetch weather data for each district
+                      districts.forEach(district => {
+                        var apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${district.coordinates[0]}&lon=${district.coordinates[1]}&appid=${apiKey}`;
+          
+                        // Fetch weather data
+                        fetch(apiUrl)
+                          .then(response => response.json())
+                          .then(data => {
+                            // Extract relevant weather information
+                            var temperature = data.main.temp;
+                            var pressure = data.main.pressure;
+                            var windSpeed = data.wind.speed;
+                            var clouds = data.clouds.all;
+          
+                            // Add markers or overlays to display weather information on the map
+                            L.marker(district.coordinates).addTo(map)
+                              .bindPopup(`<b>${district.name}</b><br>Temperature: ${temperature}°C<br>Pressure: ${pressure} hPa<br>Wind Speed: ${windSpeed} m/s<br>Clouds: ${clouds}%`)
+                              .openPopup();
+                          })
+                          .catch(error => console.error(`Error fetching weather data for ${district.name}:`, error));
+                      });
+          
+                    </script>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">National Max Temp Data:</h5>
+          
+                <!-- Line Chart -->
+                <div id="temperatureLineChart"></div>
+          
+                <script>
+                  document.addEventListener("DOMContentLoaded", () => {
+                    const series = {
+                      "Max Temperature": [25, 28, 30, 33],
+                    };
+                
+                    const districts = ["2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031"];
+                
+                    const seriesData = Object.keys(series).map((key) => ({
+                      name: key,
+                      data: series[key],
+                    }));
+                
+                    new ApexCharts(document.querySelector("#temperatureLineChart"), {
+                      series: seriesData,
+                      chart: {
+                        height: 350,
+                        type: 'line',
+                        zoom: {
+                          enabled: false
+                        },
+                        animations: {
+                          enabled: true,
+                          easing: 'easeinout',
+                          speed: 800,
+                          animateGradually: {
+                            enabled: true,
+                            delay: 150,
+                          },
+                          dynamicAnimation: {
+                            enabled: true,
+                            speed: 350,
+                          },
+                        },
+                      },
+                      dataLabels: {
+                        enabled: true,
+                        offsetY: -10,
+                        style: {
+                          fontSize: '12px',
+                          colors: ["#304758"],
+                        },
+                        formatter: function (val, opt) {
+                          return districts[opt.dataPointIndex];
+                        },
+                      },
+                      stroke: {
+                        curve: 'smooth'
+                      },
+                      grid: {
+                        row: {
+                          colors: ['#f3f3f3', 'transparent'],
+                          opacity: 0.5
+                        },
+                      },
+                      xaxis: {
+                        categories: districts,
+                      }
+                    }).render();
+                  });
+                </script>
+                
+                <!-- End Line Chart -->
+          
+              </div>
+            </div>
+          </div>
+          
+  
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">National Max Rainfall Data:</h5>
+          
+                <!-- Area Chart -->
+                <div id="rainfallAreaChart"></div>
+          
+                <script>
+                  document.addEventListener("DOMContentLoaded", () => {
+                    const series = {{% for location in location %}
+                      "{{location.name}}": {
+                        "rainfall": [810, 828, 823, 865, 840, 823, 823, 814, 848, 848, 850, 862, 868, 860, 860, 851, 849, 860, 881, 934],
+                      },
+                      {% endfor %}
+                
+                      
+                    };
+                
+                    const dates = [
+                      "Jan 2020", "Feb 2020", "Mar 2020", "Apr 2020", "May 2020", "Jun 2020", "Jul 2020", "Aug 2020", "Sep 2020",
+                      "Oct 2020", "Nov 2020", "Dec 2020", "Jan 2021", "Feb 2021", "Mar 2021", "Apr 2021", "May 2021", "Jun 2021",
+                      "Jul 2021", "Aug 2021", "Sep 2021", "Oct 2021", "Nov 2021", "Dec 2021", "Jan 2022", "Feb 2022", "Mar 2022",
+                      "Apr 2022", "May 2022", "Jun 2022", "Jul 2022", "Aug 2022", "Sep 2022", "Oct 2022", "Nov 2022", "Dec 2022",
+                      "Jan 2023", "Feb 2023", "Mar 2023", "Apr 2023", "May 2023", "Jun 2023", "Jul 2023", "Aug 2023", "Sep 2023",
+                      "Oct 2023", "Nov 2023", "Dec 2023",
+                    ];
+                
+                    const seriesData = Object.keys(series).map((key) => ({
+                      name: key,
+                      data: series[key].rainfall,
+                    }));
+                
+                    new ApexCharts(document.querySelector("#rainfallAreaChart"), {
+                      series: seriesData,
+                      chart: {
+                        type: 'area',
+                        height: 350,
+                        zoom: {
+                          enabled: false
+                        },
+                        animations: {
+                          enabled: true,
+                          easing: 'easeinout',
+                          speed: 800,
+                          animateGradually: {
+                            enabled: true,
+                            delay: 150,
+                          },
+                          dynamicAnimation: {
+                            enabled: true,
+                            speed: 350,
+                          },
+                        },
+                      },
+                      dataLabels: {
+                        enabled: true,
+                        offsetY: -10,
+                        style: {
+                          fontSize: '12px',
+                          colors: ["#304758"],
+                        },
+                      },
+                      stroke: {
+                        curve: 'smooth'
+                      },
+                      subtitle: {
+                        text: 'Max Rainfall Across Districts',
+                        align: 'left'
+                      },
+                      labels: dates,
+                      xaxis: {
+                        type: 'datetime',
+                      },
+                      yaxis: {
+                        opposite: true
+                      },
+                      legend: {
+                        horizontalAlign: 'left'
+                      }
+                    }).render();
+                  });
+                </script>
+                
+                <!-- End Area Chart -->
+          
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        </div>
+    </section>
+
+        <div class="container">
+            <h1 class="heading">Disaster Overview</h1>
+            <div class="row">
+                {% for disaster in disaster %}
+                <div class="col-lg-3">
+                    <a href="{% url 'view_disaster' disaster.id %}">
+                    <div class="card">
+                        <img src="{% static 'tr.gif' %}" class="card-img-top" alt="Image 1">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ disaster.name }}</h5>
+                            <p class="card-text">Locations affected:</p>
+                            <ul>
+                               
+                                    <li>{{ disaster.location }}</li>
+                                    <li><b>{{disaster.displaced}}</b> displaced</li>
+                                    <li><b>{{disaster.dead}}</b> casualties</li>
+                              
+                            </ul>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            {% endfor %}
+            
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- about section ends -->
+
+
+    <section class="c_finance" id="c_finance">
+
+        <h1 class="heading"> Map </h1>
+       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7955809.521978256!2d28.997710533867227!3d-13.183029989705133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18d85bdd9313c0d7%3A0x44a32e1729668543!2sMalawi!5e0!3m2!1sen!2smw!4v1700216744586!5m2!1sen!2smw" width="1400" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/chart.js/chart.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+    <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+    
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <!-- custom js file link  -->
+    <script src="js/script.js"></script>
+
+    <script>
+        var map = L.map('map').setView([51.505, -0.09], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+District,Disaster,Date,Temperature,Rainfall,Wind_Speed
+Blantyre,Floods,February 12, 2020,114,24,80
+Chikwawa,Floods,March 20, 2020,155,26,90
+Chitipa,Drought,January 2020,2,32,10
+Chiradzulu,Floods,March 20, 2020,120,25,75
+Chironga,Floods,March 20, 2020,135,27,85
+Dowa,Drought,January 2020,1,31,20
+Karonga,Drought,January 2020,0,33,15
+Kasungu,Drought,January 2020,3,32,30
+Likoma,Drought,January 2020,0,34,25
+Lilongwe,Floods,February 12, 2020,105,23,65
+Machinga,Floods,March 20, 2020,140,26,80
+Mangochi,Floods,March 20, 2020,130,25,70
+Mchinji,Drought,January 2020,2,31,25
+Mulanje,Floods,March 20, 2020,150,27,95
+Mwanza,Drought,January 2020,1,32,20
+Nkhotakota,Drought,January 2020,0,33,15
+Nsanje,Floods,March 20, 2020,160,28,90
+Ntcheu,Drought,January 2020,1,30,20
+Ntchisi,Drought,January 2020,0,32,15
+Phalombe,Floods,March 20, 2020,145,26,85
+Rumphi,Drought,January 2020,1,31,30
+Salima,Drought,January 2020,2,32,25
+Thyolo,Floods,March 20, 2020,150,27,95
+Zomba,Floods,March 20, 2020,140,26,80
+Blantyre,Floods,February 12, 2021,24,114,80
+Chikwawa,Floods,March 20, 2021,26,155,90
+Chitipa,Drought,January 2021,32,2,10
+Chiradzulu,Floods,March 20, 2021,25,120,75
+Chironga,Floods,March 20, 2021,27,135,85
+Dowa,Drought,January 2021,31,1,20
+Karonga,Drought,January 2021,33,0,15
+Kasungu,Drought,January 2021,32,3,30
+Likoma,Drought,January 2021,34,0,25
+Lilongwe,Floods,February 12, 2021,23,105,65
+Machinga,Floods,March 20, 2021,26,140,80
+Mangochi,Floods,March 20, 2021,25,130,70
+Mchinji,Drought,January 2021,31,2,25
+Mulanje,Floods,March 20, 2021,27,150,95
+Mwanza,Drought,January 2021,32,1,20
+Nkhotakota,Drought,January 2021,33,0,15
+Nsanje,Floods,March 20, 2021,28,160,90
+Ntcheu,Drought,January 2021,30,1,20
+Ntchisi,Drought,January 2021,32,0,15
+Phalombe,Floods,March 20, 2021,26,145,85
+Rumphi,Drought,January 2021,31,1,30
+Salima,Drought,January 2021,32,2,25
+Thyolo,Floods,March 20, 2021,27,150,95
+Zomba,Floods,March 20, 2021,26,140,80
+Blantyre,Floods,February 12, 2022,24,114,80
+Chikwawa,Floods,March 20, 2022,26,155,90
+Chitipa,Drought,January 2022,32,2,10
+Chiradzulu,Floods,March 20, 2022,25,120,75
+Chironga,Floods,March 20, 2022,27,135,85
+Dowa,Drought,January 2022,31,1,20
+Karonga,Drought,January 2022,33,0,15
+Kasungu,Drought,January 2022,32,3,30
+Likoma,Drought,January 2022,34,0,25
+Lilongwe,Floods,February 12, 2022,23,105,65
+Machinga,Floods,March 20, 2022,26,140,80
+Mangochi,Floods,March 20, 2022,25,130,70
+Mchinji,Drought,January 2022,31,2,25
+Mulanje,Floods,March 20, 2022,27,150,95
+Mwanza,Drought,January 2022,32,1,20
+Nkhotakota,Drought,January 2022,33,0,15
+Nsanje,Floods,March 20, 2022,28,160,90
+Ntcheu,Drought,January 2022,30,1,20
+Ntchisi,Drought,January 2022,32,0,15
+Phalombe,Floods,March 20, 2022,26,145,85
+Rumphi,Drought,January 2022,31,1,30
+Salima,Drought,January 2022,32,2,25
+Thyolo,Floods,March 20, 2022,27,150,95
+Zomba,Floods,March 20, 2022,26,140,80

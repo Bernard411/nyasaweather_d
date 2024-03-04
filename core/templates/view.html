@@ -1,0 +1,432 @@
+{% load static %}
+{% load static %}
+{% include 'header.html' %}
+<section class="section dashboard" style="margin-top: 5px; margin-left: 30px;">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-xxl-3 col-md-6">
+                    <div class="card info-card model-predictions-card">
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><span>{{view_disaster.location}} current weather data:</span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-cloud-sun"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <p id="temperature" style="font-size: x-small; font-weight: bold;">Loading...</p>
+                                    <span class="text-danger small pt-1 fw-bold">12%</span>
+                                    <span class="text-muted small pt-2 ps-1">increase</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-md-6">
+                    <div class="card info-card predictions-card">
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><span>status:</span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                                    style="background-color: #4CAF50;">
+                                    <i class="bi bi-circle-square" style="color: white;"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h5 style="font-weight: bold;">{{view_disaster.displaced}} people displaced</h5>
+                                    <span class="text-danger small pt-1 fw-bold">{{total_relief_aid_percentage }} %</span>
+                                    <span class="text-muted small pt-2 ps-1">population at risk</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-12">
+                    <div class="card info-card temperature-card">
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><span>status:</span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-success">
+                                    <i class="bi bi-emoji-dizzy-fill" style="color: white;"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h5 style="font-weight: bold;">{{view_disaster.dead}} lives lost</h5>
+                                    <span class="text-danger small pt-1 fw-bold">{{total_relief_aid_percentage }}%</span>
+                                    <span class="text-muted small pt-2 ps-1">population at risk</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-xl-12">
+                    <div class="card info-card relief-energy-card">
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><span>relief needed in %</span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-warning">
+                                    <i class="bi bi-lightning-charge-fill" style="color: red;"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h5 style="font-weight: bold;"> {{ total_relief_aid_percentage }} %</h5>
+                                    <span class="text-danger small pt-1 fw-bold">{{total_relief_aid_percentage }}%</span>
+                                    <span class="text-muted small pt-2 ps-1">population at risk</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function fetchWeatherAndDate() {
+                    const apiKey = '547afd6a9ad38bd23e255e28e1a2bf49';
+                    const location = 'Blantyre';
+                    const weatherAPI = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`;
+                    fetch(weatherAPI)
+                        .then(response => response.json())
+                        .then(data => {
+                            const temperature = data.current.temp_c;
+                            const condition = data.current.condition.text;
+                            document.getElementById('temperature').textContent = `${temperature}°C, ${condition}`;
+                        })
+                        .catch(error => console.error('Error fetching weather data: ', error));
+                    const currentDate = new Date();
+                    const options = {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    };
+                    const formattedDate = currentDate.toLocaleDateString('en-US', options);
+                    document.getElementById('current-date').textContent = formattedDate;
+                }
+                fetchWeatherAndDate();
+            </script>
+            <main>
+            </main>
+        </div>
+    </div>
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card-body">
+                    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+                    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <style>
+                        #map {
+                            height: 400px;
+                            width: 100%;
+                        }
+
+                        #chart {
+                            max-width: 400px;
+                            margin-top: 20px;
+                            margin-bottom: 40px;
+                        }
+                    </style>
+                    <h5 class="card-title">{{view_disaster.location}} as of {{view_disaster.date}}</h5>
+                    <div id="map"></div>
+                    <div id="chart">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                    <script>
+                        const data = [
+                            { date: '{{ view_disaster.date }}', deaths: {{ view_disaster.dead }}, displaced: {{ view_disaster.displaced }} },
+                        ];
+                        const disasterLocation = {
+                            latitude: {{ view_disaster.location.latitude }},
+                            longitude: {{ view_disaster.location.longitude }},
+                        };
+                        const map = L.map('map').setView([disasterLocation.latitude, disasterLocation.longitude], 11);
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+                        const ctx = document.getElementById('barChart').getContext('2d');
+                        const barChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: data.map(entry => entry.date),
+                                datasets: [{
+                                        label: 'Number of Deaths',
+                                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                                        data: data.map(entry => entry.deaths)
+                                    },
+                                    {
+                                        label: 'Number Displaced',
+                                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                                        data: data.map(entry => entry.displaced)
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false
+                            }
+                        });
+
+                        function updateChart(newData) {
+                            barChart.data.labels.push(newData.date);
+                            barChart.data.datasets[0].data.push(newData.deaths);
+                            barChart.data.datasets[1].data.push(newData.displaced);
+                            barChart.update();
+                        }
+
+                        function createBlinkingWaves(lat, lon) {
+                            let radius = 1000;
+                            const maxRadius = 5000;
+                            const interval = 1000;
+                            const waveCount = 5;
+
+                            function addCircleAndIncreaseRadius() {
+                                const circle = L.circle([lat, lon], {
+                                    color: 'red',
+                                    fillColor: '#f03',
+                                    fillOpacity: 0.5,
+                                    radius: radius
+                                }).addTo(map);
+
+                                radius += 1000;
+
+                                setTimeout(() => {
+                                    map.removeLayer(circle);
+                                }, interval);
+                            }
+
+                            function animateWaves() {
+                                let count = 0;
+
+                                function animate() {
+                                    addCircleAndIncreaseRadius();
+
+                                    count++;
+
+                                    if (count < waveCount) {
+                                        setTimeout(animate, interval);
+                                    } else {
+                                        radius = 4000;
+                                        count = 0;
+                                        setTimeout(animate, interval);
+                                    }
+                                }
+
+                                animate();
+                            }
+
+                            animateWaves();
+                        }
+
+                        function addMarker(lat, lon) {
+                            const marker = L.marker([lat, lon]).addTo(map);
+                        }
+
+                        let currentIndex = 0;
+                        setInterval(() => {
+                            if (currentIndex < data.length) {
+                                updateChart(data[currentIndex]);
+                                createBlinkingWaves(disasterLocation.latitude, disasterLocation.longitude);
+                                addMarker(disasterLocation.latitude, disasterLocation.longitude);
+                                currentIndex++;
+                            }
+                        }, 1000);
+                    </script>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{view_disaster.location}}-{{view_disaster.name}} updates</h5>
+                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel"
+                            data-bs-interval="2000">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="{{view_disaster.image.url}}" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="{{view_disaster.image_one.url}}" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="{{view_disaster.image_two.url}}" class="d-block w-100" alt="...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .card {
+                    box-shadow: 0 4px 8px rgba(50, 118, 255, 0.545);
+                }
+            </style>
+        </div>
+    </div>
+</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Weather Information for {{view_disaster.location}}</h2>
+    <table id="weatherTable">
+        <tr>
+            <th>Date</th>
+            <th>Temperature (°C)</th>
+            <th>Rainfall (mm)</th>
+            <th>Wind Speed (m/s)</th>
+        </tr>
+    </table>
+    <script>
+        const apiKey = '547afd6a9ad38bd23e255e28e1a2bf49';
+        const district = '{{view_disaster.location}}';
+
+        async function fetchWeatherData() {
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${district}&appid=${apiKey}&units=metric`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                const date = new Date().toLocaleDateString();
+                const temperature = data.main.temp;
+                const rainfall = data.rain ? data.rain['1h'] : 0;
+                const windSpeed = data.wind.speed;
+
+                const weatherTable = document.getElementById('weatherTable');
+                const newRow = weatherTable.insertRow(1);
+                newRow.insertCell(0).innerHTML = date;
+                newRow.insertCell(1).innerHTML = temperature;
+                newRow.insertCell(2).innerHTML = rainfall;
+                newRow.insertCell(3).innerHTML = windSpeed;
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+        }
+
+        fetchWeatherData();
+    </script>
+    <h2 style="margin-top: 10px;">Flood Information</h2>
+    <table>
+        <tr>
+            <th>Areas Affected</th>
+            <th>Precautionary Measures</th>
+            <th>{{view_disaster.name}}  Destruction %</th>
+        </tr>
+        {% if view_disaster.affected_areas.all %}
+            {% for affected_area in view_disaster.affected_areas.all %}
+                <tr>
+                    <td class="affected-area">{{ affected_area.name }} - {{ affected_area.district }}</td>
+                    <td class="precautionary-measures">{{ affected_area.precautionary_measures }}</td>
+                    <td class="flood-description">{{ affected_area.destruction_percentage }}%</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="3">No affected areas associated with this disaster.</td>
+            </tr>
+        {% endif %}
+          </table>
+
+</body>
+</html>
+
+<div class="row my-4">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{view_disaster.location}}-{{view_disaster.name}} destruction percentage</h5>
+
+        <div id="donutChart"></div>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const affectedAreas = [{% for affected_area in view_disaster.affected_areas.all %}
+              {
+                name: '{{ affected_area.name }}',
+                destructionPercentage: {{ affected_area.destruction_percentage }}
+              },
+            {% endfor %}];
+
+            const labels = affectedAreas.map(area => area.name);
+            const series = affectedAreas.map(area => area.destructionPercentage);
+
+            new ApexCharts(document.querySelector("#donutChart"), {
+              series: series,
+              chart: {
+                height: 350,
+                type: 'donut',
+                toolbar: {
+                  show: true
+                }
+              },
+              labels: labels,
+            }).render();
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ view_disaster.location }}-{{ view_disaster.name }} Report:</h5>
+
+        {{ view_disaster.description }}
+
+        <a href="{% url 'download_report' view_disaster.id %}" download="disaster_report.txt" style="font-size: medium;">Download Report</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/chart.js/chart.min.js' %}"></script>
+<script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
+<script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
+<script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+<script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+<script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+<script src="{% static 'assets/js/main.js' %}"></script>
+<script src="js/script.js"></script>
+
+<script>
+    var map = L.map('map').setView([51.505, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+</script>
+</body>
+</html>
